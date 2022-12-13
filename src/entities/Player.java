@@ -22,7 +22,7 @@ public class Player extends Entity{
     private int aniTick, aniIndex, aniSpeed = 15;
 	private int playerAction = IDLE;
 	private boolean left,up,right,down;
-        private float playerSpeed = 2.0f;
+    private float playerSpeed = 2.0f;
 	private boolean moving = false,attacking = false;
     
     public Player(float x, float y) {
