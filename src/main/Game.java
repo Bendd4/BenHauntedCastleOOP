@@ -12,6 +12,7 @@ public class Game implements Runnable {
 	private GamePanel gamePanel;
 	private Thread gameThread;
 	private final int FPS_SET = 120;
+	private final int UPS_SET = 200;
 
 	private Playing playing;
 	private Menu menu;
@@ -23,8 +24,6 @@ public class Game implements Runnable {
 	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
 	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
-	private final int UPS_SET = 200;
-	private Player player;
 
 	public Game() {
 		initClasses();
