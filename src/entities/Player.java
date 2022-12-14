@@ -9,6 +9,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+
+import levels.LevelManager;
+import utilz.LoadSave;
+
 import static utilz.Constants.Directions.*;
 
 import static utilz.Constants.PlayerConstants.*;
@@ -30,16 +34,16 @@ public class Player extends Entity{
         loadAnimations();
     }
     public void update(){
-         updatePos();
-         updateAnimationTick();
-	 setAnimation();
-	   
+        updatePos();
+        updateAnimationTick();
+	    setAnimation();
     }
     public void render(Graphics g){
-        	g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, 256, 160, null);
+        g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, 256, 160, null);
+        LevelManager.draw(g);
     }
 //   
-	
+
 
 	private void updateAnimationTick() {
 		aniTick++;
@@ -88,26 +92,15 @@ public class Player extends Entity{
             }
 	}
     private void loadAnimations() {
-                InputStream is = getClass().getResourceAsStream("player_sprites2.png");
-		try {
-			BufferedImage img = ImageIO.read(is);
-                        animations = new BufferedImage[10][7];
-                        for (int j = 0; j < animations.length; j++){
-                            for (int i = 0; i < animations[j].length; i++){
-				animations[j][i] = img.getSubimage(i*132  , j*86 , 120, 90);
-                        }
-		     } 
-                }catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        animations = new BufferedImage[10][7];
+        for (int j = 0; j < animations.length; j++){
+            for (int i = 0; i < animations[j].length; i++){
+                animations[j][i] = img.getSubimage(i*132  , j*86 , 120, 90);
+            }
+		} 
+    }
 		
-	    }
 
         public boolean isLeft() {
             return left;
