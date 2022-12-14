@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
-import javafx.scene.paint.Color;
 import main.Game;
 
 import static utilz.Constants.Directions.*;
