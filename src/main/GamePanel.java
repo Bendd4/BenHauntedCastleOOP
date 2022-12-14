@@ -12,12 +12,16 @@ import javax.swing.JPanel;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;
+
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.Directions.*;
 
 public class GamePanel extends JPanel {
 
 	private MouseInputs mouseInputs;
+	private Game game;
 	private float xDelta = 100, yDelta = 100;
 	private BufferedImage img;
 	private BufferedImage[][] animations;
@@ -41,7 +45,7 @@ public class GamePanel extends JPanel {
 		animations = new BufferedImage[10][7];
 		for (int j = 0; j < animations.length; j++)
 			for (int i = 0; i < animations[j].length; i++)
-				animations[j][i] = img.getSubimage(i*132  , j*86 , 120, 90);
+				animations[j][i] = img.getSubimage(i * 132, j * 86, 120, 90);
 	}
 
 	private void importImg() {
@@ -60,7 +64,7 @@ public class GamePanel extends JPanel {
 	}
 
 	private void setPanelSize() {
-		Dimension size = new Dimension(1280, 800);
+		Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
 		setPreferredSize(size);
 	}
 
@@ -94,18 +98,18 @@ public class GamePanel extends JPanel {
 	private void updatePos() {
 		if (moving) {
 			switch (playerDir) {
-			case LEFT:
-				xDelta -= 5;
-				break;
-			case UP:
-				yDelta -= 5;
-				break;
-			case RIGHT:
-				xDelta += 5;
-				break;
-			case DOWN:
-				yDelta += 5;
-				break;
+				case LEFT:
+					xDelta -= 5;
+					break;
+				case UP:
+					yDelta -= 5;
+					break;
+				case RIGHT:
+					xDelta += 5;
+					break;
+				case DOWN:
+					yDelta += 5;
+					break;
 			}
 		}
 	}
@@ -118,6 +122,10 @@ public class GamePanel extends JPanel {
 		updatePos();
 
 		g.drawImage(animations[playerAction][aniIndex], (int) xDelta, (int) yDelta, 256, 160, null);
+	}
+
+	public Game getGame() {
+		return game;
 	}
 
 }
