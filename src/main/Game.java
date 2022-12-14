@@ -23,13 +23,16 @@ public class Game implements Runnable {
 	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
 	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+	private final int UPS_SET = 200;
+	private Player player;
 
 	public Game() {
 		initClasses();
 
-		gamePanel = new GamePanel();
+		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
 		gamePanel.requestFocus();
+
 		startGameLoop();
 
 	}
@@ -77,24 +80,38 @@ public class Game implements Runnable {
 	public void run() {
 
 		double timePerFrame = 1000000000.0 / FPS_SET;
-		long lastFrame = System.nanoTime();
-		long now = System.nanoTime();
+		double timePerUpdate = 1000000000.0 / UPS_SET;
+
+		long previousTime = System.nanoTime();
 
 		int frames = 0;
+		int updates = 0;
+		double deltaF = 0;
+		double deltaU = 0;
 		long lastCheck = System.currentTimeMillis();
 
 		while (true) {
 
-			now = System.nanoTime();
-			if (now - lastFrame >= timePerFrame) {
+			long currentTime = System.nanoTime();
+
+			deltaU += (currentTime - previousTime) / timePerUpdate;
+			deltaF += (currentTime - previousTime) / timePerFrame;
+			previousTime = currentTime;
+			if (deltaU >= 1) {
+				update();
+				updates++;
+				deltaU--;
+			}
+			if (deltaF >= 1) {
 				gamePanel.repaint();
-				lastFrame = now;
+				deltaF--;
 				frames++;
 			}
 
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				System.out.println("FPS: " + frames);
+				System.out.println("FPS: " + frames + "//UPS: " + updates);
+				updates = 0;
 				frames = 0;
 			}
 		}
