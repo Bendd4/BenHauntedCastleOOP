@@ -46,7 +46,8 @@ public class LoadSave {
 
 				// Components will be in the range of 0..255:
 				int mapValue = (color & 0xff0000) >> 16; // Red
-				System.out.println(mapValue);
+				// System.out.println(mapValue);
+
 				// Color color = new Color(img.getRGB(i, j));
 				// int value = (int) color.getRed();
 

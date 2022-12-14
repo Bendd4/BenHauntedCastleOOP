@@ -40,7 +40,7 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
+        if ((e.getButton() == MouseEvent.BUTTON1) && (Gamestate.state == Gamestate.PLAYING)) {
             player.setAttacking(true);
         }
     }
