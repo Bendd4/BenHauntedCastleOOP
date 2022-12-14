@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+
+import utilz.LoadSave;
+
 import static utilz.Constants.Directions.*;
 
 import static utilz.Constants.PlayerConstants.*;
@@ -22,17 +25,17 @@ public class Player extends Entity{
     private int aniTick, aniIndex, aniSpeed = 15;
 	private int playerAction = IDLE;
 	private boolean left,up,right,down;
-        private float playerSpeed = 2.0f;
-	private boolean moving = false,attacking = false;
+    private float playerSpeed = 2.0f;
+	private boolean moving = false, attacking = false;
     
     public Player(float x, float y) {
         super(x, y); 
         loadAnimations();
     }
     public void update(){
-         updatePos();
-         updateAnimationTick();
-	 setAnimation();
+        updatePos();
+        updateAnimationTick();
+	    setAnimation();
 	   
     }
     public void render(Graphics g){
@@ -88,26 +91,14 @@ public class Player extends Entity{
             }
 	}
     private void loadAnimations() {
-                InputStream is = getClass().getResourceAsStream("player_sprites2.png");
-		try {
-			BufferedImage img = ImageIO.read(is);
-                        animations = new BufferedImage[10][7];
-                        for (int j = 0; j < animations.length; j++){
-                            for (int i = 0; i < animations[j].length; i++){
+		BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        animations = new BufferedImage[10][7];
+        for (int j = 0; j < animations.length; j++){
+            for (int i = 0; i < animations[j].length; i++){
 				animations[j][i] = img.getSubimage(i*132  , j*86 , 120, 90);
-                        }
-		     } 
-                }catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	    }
+            }
+        }
+	}
 
         public boolean isLeft() {
             return left;

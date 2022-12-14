@@ -57,5 +57,6 @@ public class KeyboardInputs implements KeyListener {
 			gamePanel.getGame().getPlayer().setAttacking(true);
 			break;
 		}
+
 	}
 }
