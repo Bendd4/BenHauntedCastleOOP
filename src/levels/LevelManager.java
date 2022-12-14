@@ -33,8 +33,7 @@ public class LevelManager {
         for (int j = 0; j < Game.GAME_HEIGHT; j++) {
             for (int i = 0; i < Game.GAME_WIDTH; i++) {
                 int index = lvl.getSpriteIndex(i, j);
-                g.drawImage(levelSprite[index], i * Game.TILES_SIZE, j * Game.TILES_SIZE, Game.TILES_SIZE,
-                        Game.TILES_SIZE, null);
+                g.drawImage(levelSprite[index], i * Game.TILES_SIZE, j * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE, null);
             }
         }
     }

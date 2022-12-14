@@ -2,11 +2,11 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-//import java.awt.image.BufferedImage;
-//import java.io.IOException;
-//import java.io.InputStream;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
-//import javax.imageio.ImageIO;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
@@ -21,13 +21,13 @@ public class GamePanel extends JPanel {
 
 	private MouseInputs mouseInputs;
 	private Game game;
-	// private float xDelta = 100, yDelta = 100;
-	// private BufferedImage img;
-	// private BufferedImage[][] animations;
-	// private int aniTick, aniIndex, aniSpeed = 15;
-	// private int playerAction = IDLE;
-	// private int playerDir = -1;
-	// private boolean moving = false;
+	private float xDelta = 100, yDelta = 100;
+	private BufferedImage img;
+	private BufferedImage[][] animations;
+	private int aniTick, aniIndex, aniSpeed = 15;
+	private int playerAction = IDLE;
+	private int playerDir = -1;
+	private boolean moving = false;
 
 	public GamePanel(Game game) {
 		mouseInputs = new MouseInputs(this);
@@ -39,12 +39,12 @@ public class GamePanel extends JPanel {
 		addMouseMotionListener(mouseInputs);
 	}
 
-	// private void loadAnimations() {
-	// animations = new BufferedImage[10][7];
-	// for (int j = 0; j < animations.length; j++)
-	// for (int i = 0; i < animations[j].length; i++)
-	// animations[j][i] = img.getSubimage(i * 132, j * 86, 120, 90);
-	// }
+	private void loadAnimations() {
+	animations = new BufferedImage[10][7];
+	for (int j = 0; j < animations.length; j++)
+	for (int i = 0; i < animations[j].length; i++)
+	animations[j][i] = img.getSubimage(i * 132, j * 86, 120, 90);
+	}
 
 	private void setPanelSize() {
 		Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
@@ -52,31 +52,31 @@ public class GamePanel extends JPanel {
 		System.out.println("Size: " + GAME_WIDTH + " / " + GAME_HEIGHT);
 	}
 
-	// private void setAnimation() {
-	// if (moving)
-	// playerAction = RUNNING;
-	// else
-	// playerAction = IDLE;
-	// }
+	private void setAnimation() {
+	if (moving)
+	playerAction = RUNNING;
+	else
+	playerAction = IDLE;
+	}
 
-	// private void updatePos() {
-	// if (moving) {
-	// switch (playerDir) {
-	// case LEFT:
-	// xDelta -= 5;
-	// break;
-	// case UP:
-	// yDelta -= 5;
-	// break;
-	// case RIGHT:
-	// xDelta += 5;
-	// break;
-	// case DOWN:
-	// yDelta += 5;
-	// break;
-	// }
-	// }
-	// }
+	private void updatePos() {
+		if (moving) {
+			switch (playerDir) {
+			case LEFT:
+			xDelta -= 5;
+			break;
+			case UP:
+			yDelta -= 5;
+			break;
+			case RIGHT:
+			xDelta += 5;
+			break;
+			case DOWN:
+			yDelta += 5;
+			break;
+			}
+		}
+	}
 
 	public void updateGame() {
 

@@ -56,7 +56,7 @@ public class Game implements Runnable {
 				menu.update();
 				break;
 			case PLAYING:
-				// levelManager.update();
+				levelManager.update();
 				player.update();
 				break;
 			case OPTION:

@@ -19,9 +19,10 @@ public class Playing extends State implements Statemethods {
 
     private void initClasses() {
         levelManager = new LevelManager(game);
-        // player = new Player(200, 200, (int) (64 * game.SCALE), (int) (40 *
-        // game.SCALE));
+        player = new Player(200, 200);
+        // player = new Player(200, 200, (int) (64 * game.SCALE), (int) (40 * game.SCALE));
         // player.LoadLvlData(LevelManager.getCurrentLevel().getLevelData());
+        
     }
 
     @Override
