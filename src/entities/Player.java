@@ -23,20 +23,21 @@ import static utilz.Constants.PlayerConstants.*;
 public class Player extends Entity {
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 15;
-	private int playerAction = IDLE;
-	private boolean left,up,right,down;
+    private int playerAction = IDLE;
+    private boolean left, up, right, down;
     private float playerSpeed = 2.0f;
-	private boolean moving = false, attacking = false;
-    
+    private boolean moving = false, attacking = false;
+
     public Player(float x, float y) {
         super(x, y);
         loadAnimations();
     }
-    public void update(){
+
+    public void update() {
         updatePos();
         updateAnimationTick();
-	    setAnimation();
-	   
+        setAnimation();
+
     }
 
     public void render(Graphics g) {
@@ -95,7 +96,7 @@ public class Player extends Entity {
         // InputStream is = getClass().getResourceAsStream("player_sprites2.png");
         // try {
         // BufferedImage img = ImageIO.read(is);
-        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
         animations = new BufferedImage[10][7];
         for (int j = 0; j < animations.length; j++) {

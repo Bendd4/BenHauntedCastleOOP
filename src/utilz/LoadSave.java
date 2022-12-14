@@ -12,16 +12,18 @@ import main.Game;
 import static utilz.Constants.Directions.*;
 
 public class LoadSave {
-    public static final String PLAYER_ATLAS = "player_sprites.png";
-    public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
+	public static final String PLAYER_ATLAS = "player_sprites.png";
+	public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
 	public static final String LEVEL_DATA = "level_data.png";
+	public static final String MENU_BUTTONS = "button_atlas.png";
+	public static final String MENU_BACKGROUND = "menu_background.png";
 
-    public static BufferedImage getSpriteAtlas(String fileName){
-        BufferedImage img = null;
-        InputStream is = LoadSave.class.getResourceAsStream("/res/" + fileName);
+	public static BufferedImage getSpriteAtlas(String fileName) {
+		BufferedImage img = null;
+		InputStream is = LoadSave.class.getResourceAsStream("/res/" + fileName);
 		try {
 			img = ImageIO.read(is);
-        } catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -31,24 +33,24 @@ public class LoadSave {
 				e.printStackTrace();
 			}
 		}
-        return img;
-    }
+		return img;
+	}
 
-	public static int[][] GetLevelData(){
+	public static int[][] GetLevelData() {
 		int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
 		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 
-		for(int j = 0; j < img.getHeight(); j++){
-			for(int i = 0; i < img.getWidth(); i++){
+		for (int j = 0; j < img.getHeight(); j++) {
+			for (int i = 0; i < img.getWidth(); i++) {
 				// https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
 				int color = img.getRGB(i, j);
-				
+
 				// Components will be in the range of 0..255:
-				int mapValue = (color & 0xff0000) >> 16; //Red
+				int mapValue = (color & 0xff0000) >> 16; // Red
 				System.out.println(mapValue);
 				// Color color = new Color(img.getRGB(i, j));
 				// int value = (int) color.getRed();
-				
+
 				if (mapValue >= 130) {
 					mapValue = 0;
 				}
@@ -57,5 +59,4 @@ public class LoadSave {
 		}
 		return lvlData;
 	}
-
-
+}
