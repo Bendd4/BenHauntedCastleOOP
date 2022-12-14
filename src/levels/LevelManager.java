@@ -12,19 +12,19 @@ public class LevelManager {
     private BufferedImage[] levelSprite;
     private Level lvl;
 
-    public LevelManager(Game game){
+    public LevelManager(Game game) {
         this.game = game;
         importOutsideSprites();
         lvl = new Level(LoadSave.GetLevelData());
     }
 
     private void importOutsideSprites() {
-        BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.LEVEL_ATLAS);
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVEL_ATLAS);
         levelSprite = new BufferedImage[130];
-        for (int j = 0; j < 10; j++){
+        for (int j = 0; j < 10; j++) {
             for (int i = 0; i < 13; i++) {
                 int index = j * 13 + i;
-                levelSprite[index] = img.getSubimage(i*32, j*32, 32, 32);
+                levelSprite[index] = img.getSubimage(i * 32, j * 32, 32, 32);
             }
         }
     }
@@ -38,7 +38,7 @@ public class LevelManager {
         }
     }
 
-    public void update(){
+    public void update() {
 
     }
 }

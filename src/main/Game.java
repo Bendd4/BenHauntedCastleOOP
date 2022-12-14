@@ -5,6 +5,10 @@ import levels.LevelManager;
 
 import java.awt.Graphics;
 
+import gamestates.Gamestate;
+import gamestates.Menu;
+import gamestates.Playing;
+
 public class Game implements Runnable {
 
 	private GameWindow gameWindow;
@@ -28,37 +32,65 @@ public class Game implements Runnable {
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
 		gamePanel.requestFocus();
-              
+
 		startGameLoop();
-                
+
+	}
+
+	private void initClasses() {
+		menu = new Menu(this);
+		levelManager = new LevelManager(this);
+		playing = new Playing(this);
 	}
 
 	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
-    public void update(){
-        // levelManager.update();
-        player.update();
-    }
-    public void render(Graphics g){
-        levelManager.draw(g);
-        player.render(g);
-    }
+
+	public void update() {
+		switch (Gamestate.state) {
+			case MENU:
+				menu.update();
+				break;
+			case PLAYING:
+				// levelManager.update();
+				player.update();
+				break;
+			case OPTION:
+			case QUIT:
+			default:
+				System.exit(0);
+				break;
+		}
+	}
+
+	public void render(Graphics g) {
+		switch (Gamestate.state) {
+			case MENU:
+				menu.draw(g);
+				break;
+			case PLAYING:
+				levelManager.draw(g);
+				player.render(g);
+				break;
+			default:
+				break;
+		}
+	}
 
 	@Override
 	public void run() {
 
 		double timePerFrame = 1000000000.0 / FPS_SET;
-                double timePerUpdate = 1000000000.0 / UPS_SET;
-		
-                long previousTime = System.nanoTime();
-                
+		double timePerUpdate = 1000000000.0 / UPS_SET;
+
+		long previousTime = System.nanoTime();
 
 		int frames = 0;
-                int updates = 0;
-                double deltaF = 0;
-                double deltaU = 0;
+		int updates = 0;
+		double deltaF = 0;
+		double deltaU = 0;
 		long lastCheck = System.currentTimeMillis();
 
 		while (true) {
@@ -79,23 +111,27 @@ public class Game implements Runnable {
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
 				System.out.println("FPS: " + frames + "//UPS: " + updates);
-                                updates = 0;
+				updates = 0;
 				frames = 0;
 			}
 		}
 
 	}
 
-    private void initClasses() {
-        player = new Player(200,200);
-        levelManager = new LevelManager(this);
-    }
-    public Player getPlayer(){
-        return player;
-    }
-    public void windowFocusLost(){
-        player.resetDirBooleans();
-    }
-   
+	public Player getPlayer(){
+		return player;
+	}
+	public void windowFocusLost() {
+		if (Gamestate.state == Gamestate.PLAYING) {
+			playing.getPlayer().resetDirBooleans();
+		}
+	}
 
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public Playing getPlaying() {
+		return playing;
+	}
 }
