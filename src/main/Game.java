@@ -57,7 +57,7 @@ public class Game implements Runnable {
 				break;
 			case PLAYING:
 				levelManager.update();
-				player.update();
+				playing.update();
 				break;
 			case OPTION:
 			case QUIT:
@@ -73,8 +73,7 @@ public class Game implements Runnable {
 				menu.draw(g);
 				break;
 			case PLAYING:
-				levelManager.draw(g);
-				player.render(g);
+				playing.draw(g);
 				break;
 			default:
 				break;
