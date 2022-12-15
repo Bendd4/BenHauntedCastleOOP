@@ -24,7 +24,7 @@ public class Playing extends State implements Statemethods {
         levelManager = new LevelManager(game);
        
          player = new Player(200, 200, (int) (150 * game.SCALE), (int) (90 * game.SCALE));
-        // player.LoadLvlData(LevelManager.getCurrentLevel().getLevelData());
+        player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         pauseOverlay = new PauseOverlay(this);
     }
 

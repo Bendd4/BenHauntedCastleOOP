@@ -26,6 +26,7 @@ public class Player extends Entity {
     private int playerAction = IDLE;
     private boolean left, up, right, down;
     private float playerSpeed = 2.0f;
+    private int[][] lvlData;
     private boolean moving = false, attacking = false;
 
    public Player(float x, float y, int width, int height) {
@@ -117,7 +118,9 @@ public class Player extends Entity {
         // }
 
     }
-
+    public void loadLvlData(int[][] lvldata){
+        this.lvlData = lvldata;
+    }
     public boolean isLeft() {
         return left;
     }

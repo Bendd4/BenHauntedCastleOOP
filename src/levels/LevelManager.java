@@ -8,14 +8,16 @@ import java.nio.Buffer;
 import java.awt.Graphics;
 
 public class LevelManager {
+
+    
     private Game game;
     private BufferedImage[] levelSprite;
-    private Level lvl;
+    private Level levelOne;
 
     public LevelManager(Game game) {
         this.game = game;
         importOutsideSprites();
-        lvl = new Level(LoadSave.GetLevelData());
+        levelOne = new Level(LoadSave.GetLevelData());
     }
 
     private void importOutsideSprites() {
@@ -32,7 +34,7 @@ public class LevelManager {
     public void draw(Graphics g) {
         for (int j = 0; j < Game.GAME_HEIGHT; j++) {
             for (int i = 0; i < Game.GAME_WIDTH; i++) {
-                int index = lvl.getSpriteIndex(i, j);
+                int index = levelOne.getSpriteIndex(i, j);
                 g.drawImage(levelSprite[index], i * Game.TILES_SIZE, j * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE, null);
             }
         }
@@ -40,5 +42,13 @@ public class LevelManager {
 
     public void update() {
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Level getCurrentLevel(){
+        return levelOne;
     }
 }
