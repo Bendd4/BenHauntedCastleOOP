@@ -15,6 +15,7 @@ import utilz.LoadSave;
 import static utilz.Constants.Directions.*;
 
 import static utilz.Constants.PlayerConstants.*;
+import static utilz.HelpMethods.CanMoveHere;
 
 /**
  *
@@ -76,24 +77,32 @@ public class Player extends Entity {
         }
     }
 
-    private void updatePos() {
-        moving = false;
-        if (left && !right) {
-            x -= playerSpeed;
-            moving = true;
-        } else if (right && !left) {
-            x += playerSpeed;
-            moving = true;
+  	private void updatePos() {
+		moving = false;
+		if (!left && !right && !up && !down)
+			return;
 
-        }
-        if (up && !down) {
-            y -= playerSpeed;
-            moving = true;
-        } else if (down && !up) {
-            y += playerSpeed;
-            moving = true;
-        }
-    }
+		float xSpeed = 0, ySpeed = 0;
+
+		if (left && !right)
+			xSpeed = -playerSpeed;
+		else if (right && !left)
+			xSpeed = playerSpeed;
+
+		if (up && !down)
+			ySpeed = -playerSpeed;
+		else if (down && !up)
+			ySpeed = playerSpeed;
+
+		if (CanMoveHere(x + xSpeed, y + ySpeed, width, height, lvlData)) {
+			this.x += xSpeed;
+			this.y += ySpeed;
+			moving = true;
+		}
+
+		
+
+	}
 
     private void loadAnimations() {
         // InputStream is = getClass().getResourceAsStream("player_sprites2.png");
