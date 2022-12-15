@@ -8,13 +8,27 @@ import entities.Player;
 import levels.LevelManager;
 import main.Game;
 import ui.PauseOverlay;
+import utilz.LoadSave;
 
 public class Playing extends State implements Statemethods {
     private Player player;
     private LevelManager levelManager;
     private PauseOverlay pauseOverlay;
     private boolean paused = false;
+    
+    private int xLvlOffset;
+    private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
+    private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
+    private int lvlWidth = LoadSave.GetLevelData()[0].length;
+    private int maxXOffset = (lvlWidth - Game.TILES_IN_WIDTH) * Game.TILES_SIZE;
+    
+    private int yLvlOffset;
+    private int topBorder = (int) (0.3 * Game.GAME_HEIGHT);
+    private int bottBorder = (int) (0.7 * Game.GAME_HEIGHT);
+    private int lvlHeight = LoadSave.GetLevelData().length;
+    private int maxYOffset = (lvlHeight - Game.TILES_IN_HEIGHT) * Game.TILES_SIZE;
 
+    
     public Playing(Game game) {
         super(game);
         initClasses();
@@ -33,15 +47,51 @@ public class Playing extends State implements Statemethods {
         if (!paused) {
             levelManager.update();
             player.update();
+            checkCamMove();
         } else {
             pauseOverlay.update();
         }
     }
+    
+    private void checkCamMove() {
+        int playerX = (int) player.getHitbox().x;
+        int diffX = playerX -xLvlOffset;
+        if (diffX > rightBorder){
+            xLvlOffset += diffX - rightBorder;
+        }
+        else if (diffX < leftBorder){
+            xLvlOffset += diffX - leftBorder;
+        }
+        
+        if (xLvlOffset > maxXOffset){
+            xLvlOffset = maxXOffset;
+        }
+        else if (xLvlOffset < 0){
+            xLvlOffset = 0;
+        }
+        
+        int playerY = (int) player.getHitbox().y;
+        int diffY = playerY - yLvlOffset;
+        if (diffY > bottBorder){
+            xLvlOffset += diffY - bottBorder;
+        }
+        else if (diffY < topBorder){
+            yLvlOffset += diffY - topBorder;
+        }
+        
+        if (yLvlOffset > maxYOffset){
+            yLvlOffset = maxYOffset;
+        }
+        else if (yLvlOffset < 0){
+            yLvlOffset = 0;
+        }
+        
+    }
 
     @Override
     public void draw(Graphics g) {
-        levelManager.draw(g);
-        player.render(g);
+        levelManager.draw(g, xLvlOffset, yLvlOffset);
+        player.render(g, xLvlOffset, yLvlOffset);
 
         if (paused) {
             pauseOverlay.draw(g);
@@ -138,4 +188,6 @@ public class Playing extends State implements Statemethods {
     public Player getPlayer() {
         return player;
     }
+
+    
 }

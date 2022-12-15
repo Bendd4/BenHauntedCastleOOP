@@ -17,7 +17,7 @@ public class Game implements Runnable {
 	private GamePanel gamePanel;
 	private Thread gameThread;
 	private final int FPS_SET = 60;
-	private final int UPS_SET = 150;
+	private final int UPS_SET = 225;
 	private Player player;
 	private LevelManager levelManager;
 
@@ -26,7 +26,7 @@ public class Game implements Runnable {
 	private GameOptions gameOptions;
 	private AudioOptions audioOptions;
 
-	public final static int TILES_DEFAULT_SIZE = 35;
+	public final static int TILES_DEFAULT_SIZE = 36;
 	public final static float SCALE = 1f;
 	public final static int TILES_IN_WIDTH = 20;
 	public final static int TILES_IN_HEIGHT = 11;
