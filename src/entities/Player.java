@@ -28,20 +28,22 @@ public class Player extends Entity {
     private float playerSpeed = 2.0f;
     private boolean moving = false, attacking = false;
 
-    public Player(float x, float y) {
-        super(x, y);
-        loadAnimations();
-    }
+   public Player(float x, float y, int width, int height) {
+		super(x, y, width, height);
+		loadAnimations();
+}
 
     public void update() {
         updatePos();
+        updateHitbox();
         updateAnimationTick();
         setAnimation();
 
     }
 
     public void render(Graphics g) {
-        g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, 256, 160, null);
+       g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, width, height, null);
+       drawHitbox(g);
     }
     //
 
