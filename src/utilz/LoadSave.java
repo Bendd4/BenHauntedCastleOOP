@@ -52,7 +52,7 @@ public class LoadSave {
 				// int value = (int) color.getRed();
 
 				if (mapValue >= 130) {
-					mapValue = 0;
+					mapValue = 98;
 				}
 				lvlData[j][i] = mapValue;
 			}

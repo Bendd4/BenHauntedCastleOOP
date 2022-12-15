@@ -24,7 +24,7 @@ public class LevelManager {
         for (int j = 0; j < 10; j++) {
             for (int i = 0; i < 13; i++) {
                 int index = j * 13 + i;
-                levelSprite[index] = img.getSubimage(i * 32, j * 32, 32, 32);
+                levelSprite[index] = img.getSubimage((i * 72)+(i*2), (j * 72)+(j*2), 36, 36);
             }
         }
     }
