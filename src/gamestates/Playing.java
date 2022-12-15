@@ -37,7 +37,7 @@ public class Playing extends State implements Statemethods {
     private void initClasses() {
         levelManager = new LevelManager(game);
        
-         player = new Player(200, 100, (int) (150 * game.SCALE), (int) (90 * game.SCALE));
+         player = new Player(200, 690, (int) (150 * game.SCALE), (int) (90 * game.SCALE));
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         pauseOverlay = new PauseOverlay(this);
     }
@@ -73,7 +73,7 @@ public class Playing extends State implements Statemethods {
         int playerY = (int) player.getHitbox().y;
         int diffY = playerY - yLvlOffset;
         if (diffY > bottBorder){
-            xLvlOffset += diffY - bottBorder;
+            yLvlOffset += diffY - bottBorder;
         }
         else if (diffY < topBorder){
             yLvlOffset += diffY - topBorder;

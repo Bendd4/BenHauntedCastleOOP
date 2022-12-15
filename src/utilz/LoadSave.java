@@ -43,8 +43,8 @@ public class LoadSave {
 	}
 
 	public static int[][] GetLevelData() {
-                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-//		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //		int[][] lvlData = new int[img.getHeight()][img.getWidth()];
                                 int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
 
