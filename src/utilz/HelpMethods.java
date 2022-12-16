@@ -17,8 +17,6 @@ public class HelpMethods {
 	private static boolean IsSolid(float x, float y, int[][] lvlData) {
 		int maxWidth = lvlData[0].length * Game.TILES_SIZE;
                                 int maxHeight = lvlData[0].length * Game.TILES_SIZE;
-
-                                System.out.println(maxHeight);
                                 if (x < 0 || x >= maxWidth)
 			return true;
 		if (y < 0 || y >= maxHeight)
