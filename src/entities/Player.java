@@ -24,10 +24,10 @@ import static utilz.HelpMethods.CanMoveHere;
  */
 public class Player extends Entity {
     private BufferedImage[][] animations;
-    private int aniTick, aniIndex, aniSpeed = 15;
+    private int aniTick, aniIndex, aniSpeed = 35;
     private int playerAction = IDLE;
     private boolean left, up, right, down;
-    private float playerSpeed = 2.0f;
+    private float playerSpeed = 0.75f;
     private int[][] lvlData;
     private float xDrawOffset = 64*Game.SCALE;
     private float yDrawOffset = 23*Game.SCALE;
@@ -47,9 +47,9 @@ public class Player extends Entity {
 
     }
 
-    public void render(Graphics g) {
-       g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y-yDrawOffset), width, height, null);
-       drawHitbox(g);
+    public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
+       g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - xLvlOffset, (int) (hitbox.y - yDrawOffset)  - yLvlOffset, width, height, null);
+//       drawHitbox(g, xLvlOffset);
     }
     //
 
@@ -86,6 +86,12 @@ public class Player extends Entity {
 		if (!left && !right && !up && !down)
 			return;
 
+//                                if (!InAir){
+                                        if ((!left && !right) || (left && right)){
+                                            return;
+                                        }
+//                                }
+                
 		float xSpeed = 0, ySpeed = 0;
 
 		if (left && !right)
@@ -114,9 +120,6 @@ public class Player extends Entity {
 	}
 
     private void loadAnimations() {
-        // InputStream is = getClass().getResourceAsStream("player_sprites2.png");
-        // try {
-        // BufferedImage img = ImageIO.read(is);
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
         animations = new BufferedImage[10][7];
@@ -125,15 +128,7 @@ public class Player extends Entity {
                 animations[j][i] = img.getSubimage(i * 132, j * 86, 120, 90);
             }
         }
-        // }catch (IOException e) {
-        // e.printStackTrace();
-        // } finally {
-        // try {
-        // is.close();
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
-        // }
+
 
     }
     public void loadLvlData(int[][] lvldata){

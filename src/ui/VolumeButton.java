@@ -56,6 +56,8 @@ public class VolumeButton extends PauseButton {
         } else {
             buttonX = x;
         }
+
+        bounds.x = buttonX - VOLUME_WIDTH / 2;
     }
 
     public void resetBools() {

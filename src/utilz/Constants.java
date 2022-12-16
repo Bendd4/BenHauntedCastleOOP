@@ -3,6 +3,42 @@ package utilz;
 import main.Game;
 
 public class Constants {
+        public static class EnemyConstants {
+		public static final int CRABBY = 233;
+
+		public static final int IDLE = 0;
+		public static final int RUNNING = 1;
+		public static final int ATTACK = 2;
+		
+
+		public static final int CRABBY_WIDTH_DEFAULT = 72;
+		public static final int CRABBY_HEIGHT_DEFAULT = 32;
+
+		public static final int CRABBY_WIDTH = (int) (CRABBY_WIDTH_DEFAULT * Game.SCALE );
+		public static final int CRABBY_HEIGHT = (int) (CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+                
+                public static final int CRABBY_DRAWOFFSET_X = (int)(26* Game.SCALE);
+                public static final int CRABBY_DRAWOFFSET_Y = (int)(9* Game.SCALE); 
+
+		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
+
+			switch (enemy_type) {
+			case CRABBY:
+				switch (enemy_state) {
+				case IDLE:
+					return 7;
+				case RUNNING:
+					return 6;
+				case ATTACK:
+					return 4;
+				}
+			}
+
+			return 0;
+
+		}
+
+	}
 
 	public static class UI {
 		public static class Buttons {
