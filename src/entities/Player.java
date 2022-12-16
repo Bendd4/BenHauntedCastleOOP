@@ -51,7 +51,7 @@ public class Player extends Entity {
        g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - xLvlOffset, (int) (hitbox.y - yDrawOffset)  - yLvlOffset, width, height, null);
 //       drawHitbox(g, xLvlOffset);
     }
-    //
+    
 
     private void updateAnimationTick() {
         aniTick++;
@@ -95,7 +95,7 @@ public class Player extends Entity {
 		float xSpeed = 0, ySpeed = 0;
 
 		if (left && !right)
-			xSpeed = -playerSpeed;
+			xSpeed -= playerSpeed;
 		else if (right && !left)
 			xSpeed = playerSpeed;
 

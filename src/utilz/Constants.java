@@ -26,11 +26,11 @@ public class Constants {
 			case CRABBY:
 				switch (enemy_state) {
 				case IDLE:
-					return 7;
+					return 9;
 				case RUNNING:
 					return 6;
 				case ATTACK:
-					return 4;
+					return 7;
 				}
 			}
 

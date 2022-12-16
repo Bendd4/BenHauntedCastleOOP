@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import gamestates.Playing;
+import main.Game;
 import utilz.LoadSave;
 import static utilz.Constants.EnemyConstants.*;
 
@@ -25,18 +26,18 @@ public class EnemyManager {
 		System.out.println("size of crabs: " + crabbies.size());
 	}
 
-	public void update(int[][] lvlData) {
+	public void update(int[][] lvlData,Player player) {
 		for (Crabby c : crabbies)
-			c.update(lvlData);
+			c.update(lvlData, player);
 	}
 
-	public void draw(Graphics g, int xLvlOffset) {
-		drawCrabs(g, xLvlOffset);
+	public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
+		drawCrabs(g, xLvlOffset, yLvlOffset);
 	}
 
-	private void drawCrabs(Graphics g, int xLvlOffset) {
+	private void drawCrabs(Graphics g, int xLvlOffset, int yLvlOffset) {
 		for (Crabby c : crabbies)
-			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset, (int) c.getHitbox().y, CRABBY_WIDTH, CRABBY_HEIGHT, null);
+			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset, (int) c.getHitbox().y - yLvlOffset - (int) (Game.SCALE*6), CRABBY_WIDTH, CRABBY_HEIGHT, null);
 
 	}
 
