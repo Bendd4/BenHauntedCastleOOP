@@ -9,7 +9,10 @@ public class Constants {
 		public static final int IDLE = 0;
 		public static final int RUNNING = 1;
 		public static final int ATTACK = 2;
+		public static final int DEAD = 4;
 		
+		
+		public static final int HIT = 5;
 
 		public static final int CRABBY_WIDTH_DEFAULT = 72;
 		public static final int CRABBY_HEIGHT_DEFAULT = 32;
@@ -37,6 +40,24 @@ public class Constants {
 			return 0;
 
 		}
+                public static int GetMaxHealth(int enemy_type){
+                    switch(enemy_type){
+                        case CRABBY:
+                            return 10;
+                            
+                        default:
+                            return 1;
+                    }
+                }
+                 public static int GetEnemyDmg(int enemy_type){
+                    switch(enemy_type){
+                        case CRABBY:
+                            return 15;
+                            
+                        default:
+                            return 1;
+                    }
+                }
 
 	}
 
