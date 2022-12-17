@@ -1,4 +1,4 @@
-package gamestates;
+    package gamestates;
 
 import entities.EnemyManager;
 import java.awt.Graphics;
@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 import levels.LevelManager;
 
 import main.Game;
+import objects.ObjectManager;
 import ui.GameOverOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
@@ -18,6 +19,7 @@ public class Playing extends State implements Statemethods {
     private Player player;
     private LevelManager levelManager;
     private EnemyManager enemyManager;
+    private ObjectManager objectManager;
     private PauseOverlay pauseOverlay;
     private GameOverOverlay gameOverOverlay;
     private boolean paused = false;
@@ -45,6 +47,7 @@ public class Playing extends State implements Statemethods {
     private void initClasses() {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
+        objectManager = new ObjectManager(this);
         player = new Player(200, 692, (int) (150 * game.SCALE), (int) (90 * game.SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         pauseOverlay = new PauseOverlay(this);
@@ -61,6 +64,7 @@ public class Playing extends State implements Statemethods {
             player.update();
         } else {
             levelManager.update();
+            objectManager.update();
             player.update();
             enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
             checkCamMove();
@@ -103,6 +107,7 @@ public class Playing extends State implements Statemethods {
         levelManager.draw(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
+        objectManager.draw(g, xLvlOffset);
 
         if (paused) {
             pauseOverlay.draw(g);
@@ -240,6 +245,10 @@ public class Playing extends State implements Statemethods {
     public void setPlayerDying(boolean playerDying) {
         this.playerDying = playerDying;
 
+    }
+
+    public ObjectManager getObjectManager(){
+        return objectManager;
     }
 
 }

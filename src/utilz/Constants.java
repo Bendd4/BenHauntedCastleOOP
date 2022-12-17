@@ -3,6 +3,31 @@ package utilz;
 import main.Game;
 
 public class Constants {
+
+	public static class ObjectConstants	{
+		public static final int RED_POTION = 0;
+		public static final int BLUE_POTION = 1;
+
+		public static final int RED_POTION_VALUE = 15;
+		public static final int BLUE_POTION_VALUE = 10;
+
+		public static final int POTION_WIDTH_DEFAULT = 12;
+		public static final int POTION_HEIGHT_DEFAULT = 16;
+		public static final int POTION_WIDTH = (int) (POTION_WIDTH_DEFAULT * Game.SCALE);
+		public static final int POTION_HEIGHT = (int) (POTION_HEIGHT_DEFAULT * Game.SCALE);
+
+		public static int GetSpriteAmount(int object_type) {
+			switch (object_type) {
+				case RED_POTION:	
+					return 7;
+				case BLUE_POTION:
+					return 7;
+			}
+
+			return 1;
+		}
+	}
+
 	public static class EnemyConstants {
 		public static final int CRABBY = 233;
 
