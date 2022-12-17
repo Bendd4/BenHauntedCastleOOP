@@ -24,7 +24,7 @@ public class ObjectManager {
     }
     
     private void loadImgs() {
-        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.POTION_ATLAS);
+        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
         potionImgs = new BufferedImage[2][7];
 
         for (int j = 0; j < potionImgs.length; j++)
@@ -47,13 +47,13 @@ public class ObjectManager {
         for (Potion p : potions)
             if(p.isActive()) {
                 int type = 0;
-                if(p.getObjType() == RED_POTION)
+                if(p.getObjType() == DOOR)
                     type = 1;
                 g.drawImage(potionImgs[type][p.getAniIndex()],
                  (int) (p.getHitbox().x - p.getxDrawOffset() - xLvlOffset), 
                  (int) (p.getHitbox().y - p.getyDrawOffset()), 
-                 POTION_WIDTH, 
-                 POTION_HEIGHT, 
+                 DOOR_WIDTH, 
+                 DOOR_HEIGHT, 
                  null);
             }
     }
