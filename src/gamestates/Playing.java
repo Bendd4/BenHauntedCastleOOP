@@ -21,22 +21,22 @@ public class Playing extends State implements Statemethods {
     private PauseOverlay pauseOverlay;
     private GameOverOverlay gameOverOverlay;
     private boolean paused = false;
-    
+
     private int xLvlOffset;
     private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
     private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
     private int lvlWidth = LoadSave.GetLevelData()[0].length;
     private int maxXOffset = (lvlWidth - Game.TILES_IN_WIDTH) * Game.TILES_SIZE;
-    
+
     private int yLvlOffset;
     private int topBorder = (int) (0.3 * Game.GAME_HEIGHT);
     private int bottBorder = (int) (0.7 * Game.GAME_HEIGHT);
     private int lvlHeight = LoadSave.GetLevelData().length;
     private int maxYOffset = (lvlHeight - Game.TILES_IN_HEIGHT) * Game.TILES_SIZE;
-    
-    private boolean gameOver;
 
-    
+    private boolean gameOver;
+    private boolean playerDying;
+
     public Playing(Game game) {
         super(game);
         initClasses();
@@ -53,49 +53,49 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
-        if (!paused && !gameOver) {
+        if (paused) {
+            pauseOverlay.update();
+        } else if (gameOver) {
+            gameOverOverlay.update();
+        } else if (playerDying) {
+            player.update();
+        } else {
             levelManager.update();
             player.update();
             enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
             checkCamMove();
-        } else {
-            pauseOverlay.update();
         }
     }
-    
+
     private void checkCamMove() {
         int playerX = (int) player.getHitbox().x;
-        int diffX = playerX -xLvlOffset;
-        if (diffX > rightBorder){
+        int diffX = playerX - xLvlOffset;
+        if (diffX > rightBorder) {
             xLvlOffset += diffX - rightBorder;
-        }
-        else if (diffX < leftBorder){
+        } else if (diffX < leftBorder) {
             xLvlOffset += diffX - leftBorder;
         }
-        
-        if (xLvlOffset > maxXOffset){
+
+        if (xLvlOffset > maxXOffset) {
             xLvlOffset = maxXOffset;
-        }
-        else if (xLvlOffset < 0){
+        } else if (xLvlOffset < 0) {
             xLvlOffset = 0;
         }
-        
+
         int playerY = (int) player.getHitbox().y;
         int diffY = playerY - yLvlOffset;
-        if (diffY > bottBorder){
+        if (diffY > bottBorder) {
             yLvlOffset += diffY - bottBorder;
-        }
-        else if (diffY < topBorder){
+        } else if (diffY < topBorder) {
             yLvlOffset += diffY - topBorder;
         }
-        
-        if (yLvlOffset > maxYOffset){
+
+        if (yLvlOffset > maxYOffset) {
             yLvlOffset = maxYOffset;
-        }
-        else if (yLvlOffset < 0){
+        } else if (yLvlOffset < 0) {
             yLvlOffset = 0;
         }
-        
+
     }
 
     @Override
@@ -106,114 +106,123 @@ public class Playing extends State implements Statemethods {
 
         if (paused) {
             pauseOverlay.draw(g);
-        }
-        else if(gameOver){
+        } else if (gameOver) {
             gameOverOverlay.draw(g);
         }
     }
-    
+
     public void resetAll() {
-		gameOver = false;
-		paused = false;
-		player.resetAll();
-		enemyManager.resetAllEnemies();
-	}
-    public void setGameOver(boolean gameOver){
+        gameOver = false;
+        paused = false;
+        playerDying = false;
+        player.resetAll();
+        enemyManager.resetAllEnemies();
+    }
+
+    public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
-    
+
     public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		enemyManager.checkEnemyHit(attackBox);
-	}
+        enemyManager.checkEnemyHit(attackBox);
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(!gameOver) {
-        if ((e.getButton() == MouseEvent.BUTTON1)) {
-            player.setAttacking(true);
-        }
+        if (!gameOver) {
+            if ((e.getButton() == MouseEvent.BUTTON1)) {
+                player.setAttacking(true);
+            }
         }
     }
 
     public void mouseDragged(MouseEvent e) {
-        if(!gameOver)
-        if (paused) {
-            pauseOverlay.mouseDragged(e);
-        }
+        if (!gameOver)
+            if (paused) {
+                pauseOverlay.mouseDragged(e);
+            }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(!gameOver)
-        if (paused) {
-            pauseOverlay.mousePressed(e);
+        if (!gameOver) {
+            if (paused) {
+                pauseOverlay.mousePressed(e);
+            }
+        } else {
+            gameOverOverlay.mousePressed(e);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(!gameOver)
-        if (paused) {
-            pauseOverlay.mouseReleased(e);
+        if (!gameOver) {
+            if (paused) {
+                pauseOverlay.mouseReleased(e);
+            }
+        } else {
+            gameOverOverlay.mouseReleased(e);
         }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if(!gameOver)
-        if (paused) {
-            pauseOverlay.mouseMoved(e);
+        if (!gameOver) {
+            if (paused) {
+                pauseOverlay.mouseMoved(e);
+            }
+        } else {
+            gameOverOverlay.mouseMoved(e);
         }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(gameOver){
+        if (gameOver) {
             gameOverOverlay.keyPressed(e);
-        }
-        else
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                player.setUp(true);
-                break;
-            case KeyEvent.VK_A:
-                player.setLeft(true);
-                System.out.println("A");
-                break;
-            case KeyEvent.VK_S:
-                player.setDown(true);
-                break;
-            case KeyEvent.VK_D:
-                player.setRight(true);
-                System.out.println("A");
-                break;
-            case KeyEvent.VK_SPACE:
-                player.setAttacking(true);
-                break;
-            case KeyEvent.VK_ESCAPE:
-                paused = !paused;
-                break;
-        }
+        } else
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_W:
+                    player.setUp(true);
+                    break;
+                case KeyEvent.VK_A:
+                    player.setLeft(true);
+                    System.out.println("A");
+                    break;
+                case KeyEvent.VK_S:
+                    player.setDown(true);
+                    break;
+                case KeyEvent.VK_D:
+                    player.setRight(true);
+                    System.out.println("A");
+                    break;
+                case KeyEvent.VK_SPACE:
+                    player.setAttacking(true);
+                    break;
+                case KeyEvent.VK_ESCAPE:
+                    paused = !paused;
+                    break;
+            }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(!gameOver)
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                player.setUp(false);
-                break;
-            case KeyEvent.VK_A:
-                player.setLeft(false);
-                break;
-            case KeyEvent.VK_S:
-                player.setDown(false);
-                break;
-            case KeyEvent.VK_D:
-                player.setRight(false);
-                break;
-        }
+        if (!gameOver)
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_W:
+                    player.setUp(false);
+                    break;
+                case KeyEvent.VK_A:
+                    player.setLeft(false);
+                    break;
+                case KeyEvent.VK_S:
+                    player.setDown(false);
+                    break;
+                case KeyEvent.VK_D:
+                    player.setRight(false);
+                    break;
+            }
     }
 
     public void unpauseGame() {
@@ -228,5 +237,9 @@ public class Playing extends State implements Statemethods {
         return player;
     }
 
-    
+    public void setPlayerDying(boolean playerDying) {
+        this.playerDying = playerDying;
+
+    }
+
 }

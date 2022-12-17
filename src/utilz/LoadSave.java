@@ -18,7 +18,7 @@ public class LoadSave {
 	public static final String PLAYER_ATLAS = "player_sprites.png";
 	public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
 	public static final String LEVEL_DATA = "level2_data.png";
-                public static final String TESTING_ROOM = "testing_room.png";
+	public static final String TESTING_ROOM = "testing_room.png";
 	public static final String MENU_BUTTONS = "button_atlas.png";
 	public static final String MENU_BACKGROUND = "menu_background.png";
 	public static final String PAUSE_BACKGROUND = "pause_menu.png";
@@ -27,10 +27,11 @@ public class LoadSave {
 	public static final String VOLUME_BUTTONS = "volume_buttons.png";
 	public static final String MENU_BACKGROUND_IMG = "background_menu.png";
 	public static final String OPTION_MENU = "options_background.png";
-        public static final String CRABBY_SPRITE = "crabby_sprite.png";
-        public static final String STATUS_BAR = "health_power_bar.png";
+	public static final String CRABBY_SPRITE = "crabby_sprite.png";
+	public static final String STATUS_BAR = "health_power_bar.png";
+	public static final String DEATH_SCREEN = "death_screen.png";
 
-        public static BufferedImage getSpriteAtlas(String fileName) {
+	public static BufferedImage getSpriteAtlas(String fileName) {
 		BufferedImage img = null;
 		InputStream is = LoadSave.class.getResourceAsStream("/res/" + fileName);
 		try {
@@ -49,10 +50,10 @@ public class LoadSave {
 	}
 
 	public static int[][] GetLevelData() {
-//                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+		// BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
-//		int[][] lvlData = new int[img.getHeight()][img.getWidth()];
-                                int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
+		// int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+		int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
 
 		for (int j = 0; j < img.getHeight(); j++) {
 			for (int i = 0; i < img.getWidth(); i++) {
@@ -74,7 +75,8 @@ public class LoadSave {
 		}
 		return lvlData;
 	}
-        public static ArrayList<Crabby> GetCrabs() {
+
+	public static ArrayList<Crabby> GetCrabs() {
 		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 		ArrayList<Crabby> list = new ArrayList<>();
 		for (int j = 0; j < img.getHeight(); j++)
