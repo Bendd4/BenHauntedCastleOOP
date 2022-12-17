@@ -4,7 +4,10 @@
  */
 package entities;
 
+import gamestates.Playing;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,26 +35,85 @@ public class Player extends Entity {
     private float xDrawOffset = 64*Game.SCALE;
     private float yDrawOffset = 23*Game.SCALE;
     private boolean moving = false, attacking = false;
+    
+    private BufferedImage statusBarImg;
 
+    private int statusBarWidth = (int) (192 * Game.SCALE);
+    private int statusBarHeight = (int) (58 * Game.SCALE);
+    private int statusBarX = (int) (10 * Game.SCALE);
+    private int statusBarY = (int) (10 * Game.SCALE);
+
+    private int healthBarWidth = (int) (150 * Game.SCALE);
+    private int healthBarHeight = (int) (4 * Game.SCALE);
+    private int healthBarXStart = (int) (34 * Game.SCALE);
+    private int healthBarYStart = (int) (14 * Game.SCALE);
+
+    private int maxHealth = 10;
+    private int currentHealth = maxHealth;
+    private int healthWidth = healthBarWidth;
+
+    private Rectangle2D.Float attackBox;
+
+    private int flipX = 0;
+    private int flipW = 1;
+
+    private boolean attackChecked;
+    private Playing playing;
+        
    public Player(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		loadAnimations();
                 initHitbox(x, y, 35 * Game.SCALE, 63 * Game.SCALE);
+                initAttackBox();
 }   
+   
+   private void initAttackBox() {
+        
+		attackBox = new Rectangle2D.Float(x, y, 65 * Game.SCALE, 63 * Game.SCALE);
+	}
 
     public void update() {
+        updateHealthBar();
+      
+        updateAttackBox();
         updatePos();
         
         updateAnimationTick();
         setAnimation();
 
     }
+    
+    private void updateAttackBox() {
+		
+              attackBox.x = hitbox.x-15;
+		
+	}
+    
+    private void updateHealthBar() {
+		healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
+	}
 
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
-       g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - xLvlOffset, (int) (hitbox.y - yDrawOffset)  - yLvlOffset, width, height, null);
-//       drawHitbox(g, xLvlOffset);
+       g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - xLvlOffset + flipX, 
+               (int) (hitbox.y - yDrawOffset)  - yLvlOffset, 
+               width * flipW, height, null);
+       drawHitbox(g, xLvlOffset, yLvlOffset);
+        drawAttackBox(g, xLvlOffset,yLvlOffset);
+        drawUI(g);
     }
     
+    private void drawAttackBox(Graphics g, int lvlOffsetX, int yLvlOffset) {
+		g.setColor(Color.red);
+		  g.drawRect((int)attackBox.x-lvlOffsetX, (int)attackBox.y-yLvlOffset, (int)attackBox.width, (int)attackBox.height);
+               
+
+	}
+    
+    private void drawUI(Graphics g) {
+		g.drawImage(statusBarImg, statusBarX, statusBarY, statusBarWidth, statusBarHeight, null);
+		g.setColor(Color.red);
+		g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthWidth, healthBarHeight);
+    }
 
     private void updateAnimationTick() {
         aniTick++;
@@ -93,17 +155,22 @@ public class Player extends Entity {
 //                                }
                 
 		float xSpeed = 0, ySpeed = 0;
-
-		if (left && !right)
-			xSpeed -= playerSpeed;
-		else if (right && !left)
-			xSpeed = playerSpeed;
-
-		if (up && !down)
+                
+		
+		if (up)
 			ySpeed = -playerSpeed;
-		else if (down && !up)
+		else if (down )
 			ySpeed = playerSpeed;
-
+                if (left) {
+			xSpeed -= playerSpeed;
+			flipX = width;
+			flipW = -1;
+		}
+		if (right) {
+			xSpeed += playerSpeed;
+			flipX = 0;
+			flipW = 1;
+		}
 //		if (CanMoveHere(x + xSpeed, y + ySpeed, width, height, lvlData)) {
 //			this.x += xSpeed;
 //			this.y += ySpeed;
@@ -118,6 +185,15 @@ public class Player extends Entity {
 		
 
 	}
+        
+        public void changeHealth(int value) {
+		currentHealth += value;
+
+		if (currentHealth <= 0)
+			currentHealth = 0;
+		else if (currentHealth >= maxHealth)
+			currentHealth = maxHealth;
+	}
 
     private void loadAnimations() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
@@ -128,7 +204,7 @@ public class Player extends Entity {
                 animations[j][i] = img.getSubimage(i * 132, j * 86, 120, 90);
             }
         }
-
+        statusBarImg = LoadSave.getSpriteAtlas(LoadSave.STATUS_BAR);
 
     }
     public void loadLvlData(int[][] lvldata){

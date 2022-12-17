@@ -28,8 +28,9 @@ public class LoadSave {
 	public static final String MENU_BACKGROUND_IMG = "background_menu.png";
 	public static final String OPTION_MENU = "options_background.png";
         public static final String CRABBY_SPRITE = "crabby_sprite.png";
+        public static final String STATUS_BAR = "health_power_bar.png";
 
-	public static BufferedImage getSpriteAtlas(String fileName) {
+        public static BufferedImage getSpriteAtlas(String fileName) {
 		BufferedImage img = null;
 		InputStream is = LoadSave.class.getResourceAsStream("/res/" + fileName);
 		try {
