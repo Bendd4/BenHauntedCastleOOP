@@ -19,6 +19,7 @@ public class LoadSave {
 	public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
 	public static final String LEVEL_DATA = "level2_data.png";
 	public static final String TESTING_ROOM = "testing_room.png";
+        
 	public static final String MENU_BUTTONS = "button_atlas.png";
 	public static final String MENU_BACKGROUND = "menu_background.png";
 	public static final String PAUSE_BACKGROUND = "pause_menu.png";
@@ -27,9 +28,11 @@ public class LoadSave {
 	public static final String VOLUME_BUTTONS = "volume_buttons.png";
 	public static final String MENU_BACKGROUND_IMG = "background_menu.png";
 	public static final String OPTION_MENU = "options_background.png";
+                public static final String DEATH_SCREEN = "death_screen.png";
+        
 	public static final String CRABBY_SPRITE = "crabby_sprite.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
-	public static final String DEATH_SCREEN = "death_screen.png";
+
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";	
 
 	public static BufferedImage getSpriteAtlas(String fileName) {

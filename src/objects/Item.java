@@ -2,9 +2,9 @@ package objects;
 
 import main.Game;
 
-public class Potion extends GameObject {
+public class Item extends GameObject {
 
-    public Potion(int x, int y, int objType) {
+    public Item(int x, int y, int objType) {
         super(x, y, objType);
         doAnimation = true;
         initHitbox(7, 14, 7, 14);

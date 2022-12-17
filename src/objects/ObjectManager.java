@@ -11,47 +11,51 @@ import static utilz.Constants.ObjectConstants.*;
 public class ObjectManager {
 
     private Playing playing;
-    private BufferedImage[][] potionImgs;
-    private ArrayList<Potion> potions;
+//    private BufferedImage[][] potionImgs;
+    private BufferedImage doorImgs;
+    private ArrayList<Item> potions;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
         loadImgs();
         
         potions = new ArrayList<>();
-        potions.add(new Potion(300,300,0));
-        potions.add(new Potion(400,300,1));
+        potions.add(new Item(1100,1500,0));
+        potions.add(new Item(1000,1500,1));
     }
     
     private void loadImgs() {
-        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
-        potionImgs = new BufferedImage[2][7];
+//        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
+        doorImgs = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
 
-        for (int j = 0; j < potionImgs.length; j++)
-            for (int i = 0; i < potionImgs[j].length; i++)
-                potionImgs[j][i] = potionSprite.getSubimage(12 * i, 16 * j, 12, 16);
+//        potionImgs = new BufferedImage[2][7];
+
+//        for (int j = 0; j < potionImgs.length; j++)
+//            for (int i = 0; i < potionImgs[j].length; i++)
+//                potionImgs[j][i] = potionSprite.getSubimage(12 * i, 16 * j, 12, 16);
 
     }
 
     public void update() {
-        for (Potion p : potions)
+        for (Item p : potions)
             if(p.isActive())
                 p.update();
     }
 
-    public void draw(Graphics g, int xLvlOffset) {
-        drawPotions(g, xLvlOffset);
+    public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
+        drawDoors(g, xLvlOffset, yLvlOffset);
     }
 
-    private void drawPotions(Graphics g, int xLvlOffset) {
-        for (Potion p : potions)
+    private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
+        for (Item p : potions)
             if(p.isActive()) {
                 int type = 0;
                 if(p.getObjType() == DOOR)
                     type = 1;
-                g.drawImage(potionImgs[type][p.getAniIndex()],
+//                g.drawImage(doorImgs[type][p.getAniIndex()],
+                g.drawImage(doorImgs,
                  (int) (p.getHitbox().x - p.getxDrawOffset() - xLvlOffset), 
-                 (int) (p.getHitbox().y - p.getyDrawOffset()), 
+                 (int) (p.getHitbox().y - p.getyDrawOffset() - yLvlOffset), 
                  DOOR_WIDTH, 
                  DOOR_HEIGHT, 
                  null);

@@ -49,7 +49,7 @@ public class GameObject {
 
     public void drawHitbox(Graphics g, int xLvlOffset,int yLvlOffset){
         g.setColor(Color.GREEN);
-        g.drawRect((int)hitbox.x-xLvlOffset, (int)hitbox.y-yLvlOffset, (int)hitbox.width, (int)hitbox.height);
+        g.drawRect((int)hitbox.x - xLvlOffset, (int)hitbox.y - yLvlOffset, (int)hitbox.width, (int)hitbox.height);
     }
 
     public int getObjType() {

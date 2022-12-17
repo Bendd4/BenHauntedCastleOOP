@@ -107,7 +107,7 @@ public class Playing extends State implements Statemethods {
         levelManager.draw(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
-        objectManager.draw(g, xLvlOffset);
+        objectManager.draw(g, xLvlOffset, yLvlOffset);
 
         if (paused) {
             pauseOverlay.draw(g);
