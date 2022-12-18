@@ -3,6 +3,7 @@ package objects;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 
 import gamestates.*;
 import utilz.LoadSave;
@@ -24,6 +25,31 @@ public class ObjectManager {
         potions.add(new Item(1000,1500,1));
     }
     
+    public void checkObjectTouched(Rectangle2D.Float hitbox) {
+        for(Item p : potions)
+            if(p.isActive()) {
+                if(hitbox.intersects(p.getHitbox())) {
+                    p.setActive(false);
+                    applyEffectToPlayer(p);
+                }
+            }
+    }
+
+    public void checkObjectHit(Rectangle2D.Float attackbox) {
+        for(Item p : potions)
+            if(p.isActive()) {
+                if(p.getHitbox().intersects(attackbox)) {
+                    p.setAnimation(true);
+                    // applyEffectToPlayer(p);
+                }
+            }
+    }
+
+    public void applyEffectToPlayer(Item p) {
+        if(p.getObjType() == DOOR)
+            playing.getPlayer().changeHealth(DOOR_VALUE);
+    }
+
     private void loadImgs() {
 //        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
         doorImgs = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
@@ -60,5 +86,10 @@ public class ObjectManager {
                  DOOR_HEIGHT, 
                  null);
             }
+    }
+
+    public void resetAllObjects() {
+        for (Item p : potions)
+            p.reset();
     }
 }
