@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import objects.Item;
 
 import static utilz.Constants.Directions.*;
 import static utilz.Constants.EnemyConstants.CRABBY;
+import static utilz.Constants.ObjectConstants.*;
 
 public class LoadSave {
 	public static final String PLAYER_ATLAS = "player_sprites.png";
@@ -54,8 +56,8 @@ public class LoadSave {
 	}
 
 	public static int[][] GetLevelData() {
-		// BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+		 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+//		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 		// int[][] lvlData = new int[img.getHeight()][img.getWidth()];
 		int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
 
@@ -93,4 +95,17 @@ public class LoadSave {
 		return list;
 
 	}
+        
+                public static ArrayList<Item> GetDoor(){
+                        BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+		ArrayList<Item> list = new ArrayList<>();
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getGreen();
+				if (value == DOOR)
+					list.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+			}
+		return list;
+                }
 }
