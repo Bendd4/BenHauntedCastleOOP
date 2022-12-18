@@ -5,12 +5,12 @@ import main.Game;
 public class Constants {
 
 	public static class ObjectConstants	{
-		public static final int DOOR = 0;
+		public static final int DOOR = 200;
 
-		public static final int DOOR_VALUE = 15;
+		public static final int DOOR_VALUE = 100;
 
-		public static final int DOOR_WIDTH_DEFAULT = 103;
-		public static final int DOOR_HEIGHT_DEFAULT = 154;
+		public static final int DOOR_WIDTH_DEFAULT = 72;
+		public static final int DOOR_HEIGHT_DEFAULT = 108;
 		public static final int DOOR_WIDTH = (int) (DOOR_WIDTH_DEFAULT * Game.SCALE);
 		public static final int DOOR_HEIGHT = (int) (DOOR_HEIGHT_DEFAULT * Game.SCALE);
 

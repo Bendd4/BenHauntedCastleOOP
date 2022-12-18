@@ -14,23 +14,29 @@ public class ObjectManager {
     private Playing playing;
 //    private BufferedImage[][] potionImgs;
     private BufferedImage doorImgs;
-    private ArrayList<Item> door;
+    private ArrayList<Item> doors;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
         loadImgs();
+        doors = LoadSave.GetDoor();
+//        System.out.println(doors);
+//        addObjects();
         
-        door = new ArrayList<>();
-        door.add(new Item(1100,1500,0));
-        door.add(new Item(1000,1500,1));
+//        door = new ArrayList<>();
+//        door.add(new Item(1100,1500,DOOR));
+//        door.add(new Item(1000,1500,DOOR));
+    }
+    
+    public void addObjects(){
+        doors = LoadSave.GetDoor();
+//        LoadSave.Get
     }
     
     public void checkObjectTouched(Rectangle2D.Float hitbox) {
-        for(Item p : door)
+        for(Item p : doors)
             if(p.isActive()) {
                 if(hitbox.intersects(p.getHitbox())) {
-                    p.x = 1500;
-                    p.y = 2000;
                     p.setActive(false);
                     applyEffectToPlayer(p);
                 }
@@ -38,7 +44,7 @@ public class ObjectManager {
     }
 
     public void checkObjectHit(Rectangle2D.Float attackbox) {
-        for(Item p : door)
+        for(Item p : doors)
             if(p.isActive()) {
                 if(p.getHitbox().intersects(attackbox)) {
                     p.setAnimation(true);
@@ -49,8 +55,12 @@ public class ObjectManager {
 
     public void applyEffectToPlayer(Item p) {
         if(p.getObjType() == DOOR)
-            playing.getPlayer().changeHealth(DOOR_VALUE);
+//            playing.getPlayer().changeHealth(DOOR_VALUE);
+            p.x = 1500;
+            p.y = 2000;
     }
+    
+
 
     private void loadImgs() {
 //        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
@@ -65,7 +75,7 @@ public class ObjectManager {
     }
 
     public void update() {
-        for (Item p : door)
+        for (Item p : doors)
             if(p.isActive())
                 p.update();
     }
@@ -75,15 +85,15 @@ public class ObjectManager {
     }
 
     private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
-        for (Item p : door)
-            if(p.isActive()) {
+        for (Item door : doors)
+            if(door.isActive()) {
                 int type = 0;
-                if(p.getObjType() == DOOR)
+                if(door.getObjType() == DOOR)
                     type = 1;
 //                g.drawImage(doorImgs[type][p.getAniIndex()],
                 g.drawImage(doorImgs,
-                 (int) (p.getHitbox().x - p.getxDrawOffset() - xLvlOffset), 
-                 (int) (p.getHitbox().y - p.getyDrawOffset() - yLvlOffset), 
+                 (int) (door.getHitbox().x - door.getxDrawOffset() - xLvlOffset), 
+                 (int) (door.getHitbox().y - door.getyDrawOffset() - yLvlOffset), 
                  DOOR_WIDTH, 
                  DOOR_HEIGHT, 
                  null);
@@ -91,7 +101,7 @@ public class ObjectManager {
     }
 
     public void resetAllObjects() {
-        for (Item p : door)
+        for (Item p : doors)
             p.reset();
     }
 }
