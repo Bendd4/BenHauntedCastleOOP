@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import gamestates.*;
+import main.Game;
 import utilz.LoadSave;
 import static utilz.Constants.ObjectConstants.*;
 
@@ -85,19 +86,23 @@ public class ObjectManager {
     }
 
     private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
-        for (Item door : doors)
+        for (Item door : doors){
             if(door.isActive()) {
                 int type = 0;
                 if(door.getObjType() == DOOR)
                     type = 1;
+                
 //                g.drawImage(doorImgs[type][p.getAniIndex()],
                 g.drawImage(doorImgs,
-                 (int) (door.getHitbox().x - door.getxDrawOffset() - xLvlOffset), 
-                 (int) (door.getHitbox().y - door.getyDrawOffset() - yLvlOffset), 
+//                  door.getHitbox().x is wrong.
+                 (int) ((door.getHitbox().x) - door.getxDrawOffset() - xLvlOffset), 
+                 (int) ((door.getHitbox().y) - door.getyDrawOffset() - yLvlOffset), 
                  DOOR_WIDTH, 
                  DOOR_HEIGHT, 
                  null);
             }
+//            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
+        }
     }
 
     public void resetAllObjects() {
