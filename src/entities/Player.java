@@ -131,7 +131,7 @@ public class Player extends Entity {
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
         g.drawImage(animations[playerAction][aniIndex],
                 (int) (hitbox.x - xDrawOffset) - xLvlOffset + flipX,
-                (int) (hitbox.y - yDrawOffset) - yLvlOffset,
+                (int) (hitbox.y - yDrawOffset) - yLvlOffset-14,
                 width * flipW, height, null);
         drawHitbox(g, xLvlOffset, yLvlOffset);
         drawAttackBox(g, xLvlOffset, yLvlOffset);
@@ -232,10 +232,10 @@ public class Player extends Entity {
     private void loadAnimations() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-        animations = new BufferedImage[10][7];
+        animations = new BufferedImage[4][8];
         for (int j = 0; j < animations.length; j++) {
             for (int i = 0; i < animations[j].length; i++) {
-                animations[j][i] = img.getSubimage(i * 132, j * 86, 120, 90);
+                animations[j][i] = img.getSubimage(i * 150, j *150, 150, 150);
             }
         }
         statusBarImg = LoadSave.getSpriteAtlas(LoadSave.STATUS_BAR);

@@ -17,7 +17,7 @@ import static utilz.Constants.EnemyConstants.CRABBY;
 import static utilz.Constants.ObjectConstants.*;
 
 public class LoadSave {
-	public static final String PLAYER_ATLAS = "player_sprites.png";
+	public static final String PLAYER_ATLAS = "player.png";
 	public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
 	public static final String LEVEL_DATA = "level2_data.png";
 	public static final String TESTING_ROOM = "testing_room.png";
@@ -56,7 +56,7 @@ public class LoadSave {
 	}
 
 	public static int[][] GetLevelData() {
-		 BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+		 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 //		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 		// int[][] lvlData = new int[img.getHeight()][img.getWidth()];
 		int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
@@ -84,7 +84,7 @@ public class LoadSave {
 
 	public static ArrayList<Crabby> GetCrabs() {
 //		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
-                                BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 		ArrayList<Crabby> list = new ArrayList<>();
 		for (int j = 0; j < img.getHeight(); j++)
 			for (int i = 0; i < img.getWidth(); i++) {
