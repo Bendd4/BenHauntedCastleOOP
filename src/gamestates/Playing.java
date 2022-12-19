@@ -46,8 +46,8 @@ public class Playing extends State implements Statemethods {
 
     private void initClasses() {
         levelManager = new LevelManager(game);
-        enemyManager = new EnemyManager(this);
         objectManager = new ObjectManager(this);
+        enemyManager = new EnemyManager(this);
         player = new Player(200, 800, (int) (150 * game.SCALE), (int) (150 * game.SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         pauseOverlay = new PauseOverlay(this);
@@ -105,10 +105,9 @@ public class Playing extends State implements Statemethods {
     @Override
     public void draw(Graphics g) {
         levelManager.draw(g, xLvlOffset, yLvlOffset);
-       
-        enemyManager.draw(g, xLvlOffset, yLvlOffset);
         objectManager.draw(g, xLvlOffset, yLvlOffset);
-         player.render(g, xLvlOffset, yLvlOffset);
+        enemyManager.draw(g, xLvlOffset, yLvlOffset);
+        player.render(g, xLvlOffset, yLvlOffset);
 
         if (paused) {
             pauseOverlay.draw(g);
@@ -122,8 +121,9 @@ public class Playing extends State implements Statemethods {
         paused = false;
         playerDying = false;
         player.resetAll();
-        enemyManager.resetAllEnemies();
         objectManager.resetAllObjects();
+        enemyManager.resetAllEnemies();
+
     }
 
     public void setGameOver(boolean gameOver) {

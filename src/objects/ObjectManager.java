@@ -25,8 +25,6 @@ public class ObjectManager {
 //        addObjects();
         
 //        door = new ArrayList<>();
-//        door.add(new Item(1100,1500,DOOR));
-//        door.add(new Item(1000,1500,DOOR));
     }
     
     public void addObjects(){
@@ -38,7 +36,7 @@ public class ObjectManager {
         for(Item p : doors)
             if(p.isActive()) {
                 if(hitbox.intersects(p.getHitbox())) {
-                    p.setActive(false);
+//                    p.setActive(false);
                     applyEffectToPlayer(p);
                 }
             }
@@ -65,7 +63,8 @@ public class ObjectManager {
 //                x = 600;
             }
             else if (i == doors.get(8)){
-                y = 510;
+//                y = 510;
+                y = (int) doors.get(5).hitbox.y + DOOR_HEIGHT/3 + 6;
 //             x = 1000;
             }
             
@@ -78,9 +77,10 @@ public class ObjectManager {
 
 
     private void loadImgs() {
-//        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
+
         doorImgs = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
 
+//        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
 //        potionImgs = new BufferedImage[2][7];
 
 //        for (int j = 0; j < potionImgs.length; j++)
@@ -108,7 +108,6 @@ public class ObjectManager {
                 
 //                g.drawImage(doorImgs[type][p.getAniIndex()],
                 g.drawImage(doorImgs,
-//                  door.getHitbox().x is wrong.
                  (int) ((door.getHitbox().x) - door.getxDrawOffset() - xLvlOffset), 
                  (int) ((door.getHitbox().y) - door.getyDrawOffset() - yLvlOffset), 
                  DOOR_WIDTH, 
