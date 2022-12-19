@@ -174,7 +174,7 @@ public class Player extends Entity {
         else
             playerAction = IDLE;
         if (attacking) {
-//            playerAction = ATTACK_1;
+            playerAction = ATTACK_1;
         }
         if (startAni != playerAction) {
             resetAniTick();
@@ -234,7 +234,7 @@ public class Player extends Entity {
     private void loadAnimations() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-        animations = new BufferedImage[4][8];
+        animations = new BufferedImage[5][8];
         for (int j = 0; j < animations.length; j++) {
             for (int i = 0; i < animations[j].length; i++) {
                 animations[j][i] = img.getSubimage(i * 150, j *150, 150, 150);
