@@ -40,10 +40,12 @@ public class EnemyManager {
 	private void drawCrabs(Graphics g, int xLvlOffset, int yLvlOffset) {
 		for (Crabby c : crabbies){
                     if(c.isActive()){
-			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset + +c.flipX(), 
-                                (int) (c.getHitbox().y - yLvlOffset - (int) (Game.SCALE*6)), 
+			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], 
+                                (int) c.getHitbox().x - xLvlOffset-48 +c.flipX(), 
+                                (int) (c.getHitbox().y - yLvlOffset-20), 
                                 CRABBY_WIDTH *c.flipW(), CRABBY_HEIGHT, null);
                         c.drawAttackBox(g, xLvlOffset, yLvlOffset);
+                        c.drawHitbox(g, xLvlOffset, yLvlOffset);
                     }
                 }
 	}
@@ -58,7 +60,7 @@ public class EnemyManager {
 	}
 
 	private void loadEnemyImgs() {
-		crabbyArr = new BufferedImage[5][9];
+		crabbyArr = new BufferedImage[10][7];
 		BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.CRABBY_SPRITE);
 		for (int j = 0; j < crabbyArr.length; j++)
 			for (int i = 0; i < crabbyArr[j].length; i++)

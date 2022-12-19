@@ -32,7 +32,7 @@ public class LoadSave {
 	public static final String OPTION_MENU = "options_background.png";
                 public static final String DEATH_SCREEN = "death_screen.png";
         
-	public static final String CRABBY_SPRITE = "crabby_sprite.png";
+	public static final String CRABBY_SPRITE = "player_sprites.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";	
@@ -56,7 +56,7 @@ public class LoadSave {
 	}
 
 	public static int[][] GetLevelData() {
-		 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+		 BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 		// int[][] lvlData = new int[img.getHeight()][img.getWidth()];
 		int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
@@ -84,14 +84,14 @@ public class LoadSave {
 
 	public static ArrayList<Crabby> GetCrabs() {
 //		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
-                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+                                BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 		ArrayList<Crabby> list = new ArrayList<>();
 		for (int j = 0; j < img.getHeight(); j++)
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getBlue();
 				if (value == CRABBY)
-					list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+					list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE-28));
 			}
 		return list;
 
