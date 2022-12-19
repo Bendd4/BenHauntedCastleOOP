@@ -58,14 +58,15 @@ public class ObjectManager {
     public void applyEffectToPlayer(Item i) {
         if(i.getObjType() == DOOR){
             int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y + 44;
-            if (i == doors.get(0)){
-                x = 200;
+            if (i == doors.get(2)){
+//                x = 200;
             }
-            else if (i == doors.get(1)){
-                x = 600;
+            else if (i == doors.get(5)){
+//                x = 600;
             }
-            else if (i == doors.get(2)){
-                x = 1000;
+            else if (i == doors.get(8)){
+                y = 510;
+//             x = 1000;
             }
             
             playing.getPlayer().changeLoc(x, y);

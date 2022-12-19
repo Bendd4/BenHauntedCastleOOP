@@ -16,10 +16,11 @@ import static utilz.Constants.Directions.*;
 import static utilz.Constants.EnemyConstants.CRABBY;
 import static utilz.Constants.ObjectConstants.*;
 
+
 public class LoadSave {
 	public static final String PLAYER_ATLAS = "spritesheet.png";
 	public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
-	public static final String LEVEL_DATA = "level2_data.png";
+	public static final String LEVEL_DATA = "level_data.png";
 	public static final String TESTING_ROOM = "testing_room.png";
         
 	public static final String MENU_BUTTONS = "button_atlas.png";
@@ -35,7 +36,14 @@ public class LoadSave {
 	public static final String CRABBY_SPRITE = "player_sprites.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 
-	public static final String DOOR_IMG = "level res/Objects/Door (5).png";	
+	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
+        
+                public static final String SHIELD1_IMG = "level res/Objects/Shield (1).png";
+                public static final String SHIELD2_IMG = "level res/Objects/Shield (2).png";
+                
+                public static final String CROWN_IMG = "level res/Objects/Crown.png";
+                
+                public static final String THRONE_IMG = "level res/Objects/Throne (1).png";
 
 	public static BufferedImage getSpriteAtlas(String fileName) {
 		BufferedImage img = null;
@@ -56,8 +64,8 @@ public class LoadSave {
 	}
 
 	public static int[][] GetLevelData() {
-		 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-//		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//		 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 		// int[][] lvlData = new int[img.getHeight()][img.getWidth()];
 		int[][] lvlData = new int[Game.GAME_HEIGHT][Game.GAME_WIDTH];
 
@@ -83,8 +91,8 @@ public class LoadSave {
 	}
 
 	public static ArrayList<Crabby> GetCrabs() {
-//		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
-                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 		ArrayList<Crabby> list = new ArrayList<>();
 		for (int j = 0; j < img.getHeight(); j++)
 			for (int i = 0; i < img.getWidth(); i++) {
@@ -98,8 +106,8 @@ public class LoadSave {
 	}
         
                 public static ArrayList<Item> GetDoor(){
-//                      BufferedImage img = getSpriteAtlas(LEVEL_DATA);
-                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+                      BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 		ArrayList<Item> doorList = new ArrayList<>();
                                 int time = 0;
 		for (int j = 0; j < img.getHeight(); j++){
