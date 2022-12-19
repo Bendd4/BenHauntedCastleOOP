@@ -75,9 +75,10 @@ public abstract class Enemy extends Entity {
 	}
         
         protected boolean canSeePlayer(int[][] lvlData, Player player) {
-		int playerTileY = (int) (player.getHitbox().y / Game.TILES_SIZE);
-            
-		if (playerTileY == tileY)
+//		int playerTileY = (int) (player.getHitbox().y / Game.TILES_SIZE);
+                                
+                                if (player.getHitbox().y == hitbox.y)
+//		if (playerTileY == tileY)
 			if (isPlayerInRange(player)) {
 				if (IsSightClear(lvlData, hitbox, player.hitbox, tileY))
 					return true;
@@ -86,7 +87,7 @@ public abstract class Enemy extends Entity {
 		return false;
 	}
         protected boolean isPlayerInRange(Player player) {
-                        if (player.hitbox.y - hitbox.y > -1){
+                        if (Math.abs(player.hitbox.y - hitbox.y) < 1){
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
 		return absValue <= attackDistance * 5;
                         }
@@ -96,7 +97,7 @@ public abstract class Enemy extends Entity {
 	}
         
         protected boolean isPlayerCloseForAttack(Player player) {
-                        if (player.hitbox.y - hitbox.y > -1){
+                        if (Math.abs(player.hitbox.y - hitbox.y) < 1){
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
                                 return absValue <= attackDistance*1;
                         }
