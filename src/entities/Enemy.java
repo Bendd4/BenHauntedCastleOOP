@@ -86,16 +86,23 @@ public abstract class Enemy extends Entity {
 		return false;
 	}
         protected boolean isPlayerInRange(Player player) {
+                        if (player.hitbox.y - hitbox.y > -1){
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
-                
 		return absValue <= attackDistance * 5;
+                        }
+                        else{
+                            return false;
+                        }
 	}
         
         protected boolean isPlayerCloseForAttack(Player player) {
+                        if (player.hitbox.y - hitbox.y > -1){
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
-               
-                
-		return absValue <= attackDistance*1;
+                                return absValue <= attackDistance*1;
+                        }
+                        else{
+                            return false;
+                        }
 	}
         
         public void hurt(int amount) {

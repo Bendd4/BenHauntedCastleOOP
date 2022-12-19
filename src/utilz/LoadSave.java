@@ -109,6 +109,7 @@ public class LoadSave {
 				if (value == 200){
                                                                                 time++;
                                                                                 System.out.println("Number of time door was added: " + time);
+                                                                                System.out.println(i + " : " + j);
 					doorList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                                                 }
 			}
