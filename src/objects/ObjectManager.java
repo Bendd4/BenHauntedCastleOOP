@@ -48,6 +48,7 @@ public class ObjectManager {
         for(Item p : doors)
             if(p.isActive()) {
                 if(p.getHitbox().intersects(attackbox)) {
+                    System.out.println("use item");
                     p.setAnimation(true);
                     // applyEffectToPlayer(p);
                 }
@@ -59,7 +60,7 @@ public class ObjectManager {
             int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y;
 
             if (i == doors.get(0)){
-                x = 2000;
+                x = 20000;
 //                y = 3600;
             }			
             

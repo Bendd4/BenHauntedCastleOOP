@@ -105,7 +105,7 @@ public class Player extends Entity {
     }
 
     private void checkItemTouched() {
-        playing.checkItemTouched(hitbox);
+//        playing.checkItemTouched(hitbox);
     }
 
     private void checkAttack() {
@@ -174,7 +174,7 @@ public class Player extends Entity {
         else
             playerAction = IDLE;
         if (attacking) {
-            playerAction = ATTACK_1;
+//            playerAction = ATTACK_1;
         }
         if (startAni != playerAction) {
             resetAniTick();
