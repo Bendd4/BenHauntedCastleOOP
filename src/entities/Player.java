@@ -121,6 +121,7 @@ public class Player extends Entity {
     private void updateAttackBox() {
 
         attackBox.x = hitbox.x - 15;
+        attackBox.y = hitbox.y;
 
     }
 
