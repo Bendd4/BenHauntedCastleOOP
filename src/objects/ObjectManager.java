@@ -57,8 +57,10 @@ public class ObjectManager {
     public void applyEffectToPlayer(Item p) {
         if(p.getObjType() == DOOR)
 //            playing.getPlayer().changeHealth(DOOR_VALUE);
+            System.out.println("Object interacted");
             p.x = 1500;
             p.y = 2000;
+//            playing.getPlayer().
     }
     
 

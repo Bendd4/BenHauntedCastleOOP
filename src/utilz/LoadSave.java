@@ -98,17 +98,22 @@ public class LoadSave {
 	}
         
                 public static ArrayList<Item> GetDoor(){
-//                        BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//                      BufferedImage img = getSpriteAtlas(LEVEL_DATA);
                                 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-		ArrayList<Item> list = new ArrayList<>();
-		for (int j = 0; j < img.getHeight(); j++)
+		ArrayList<Item> doorList = new ArrayList<>();
+                                int time = 0;
+		for (int j = 0; j < img.getHeight(); j++){
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getGreen();
-				if (value == DOOR)
-                                                                                System.out.println(value);
-					list.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, DOOR));
+				if (value == 200){
+                                                                                time++;
+                                                                                System.out.println("Number of time door was added: " + time);
+					doorList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+                                                                }
 			}
-		return list;
+                                }
+                                System.out.println("Door size :" + doorList.size());
+                                return doorList;
                 }
 }
