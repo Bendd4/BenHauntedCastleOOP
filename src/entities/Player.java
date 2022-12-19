@@ -228,6 +228,7 @@ public class Player extends Entity {
         else if (currentHealth >= maxHealth)
             currentHealth = maxHealth;
     }
+    
 
     private void loadAnimations() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);

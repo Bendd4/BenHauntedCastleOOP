@@ -54,14 +54,20 @@ public class ObjectManager {
             }
     }
 
-    public void applyEffectToPlayer(Item p) {
-        if(p.getObjType() == DOOR)
-//            playing.getPlayer().changeHealth(DOOR_VALUE);
+    public void applyEffectToPlayer(Item i) {
+        if(i.getObjType() == DOOR){
+            int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y;
+
+            if (i == doors.get(0)){
+                x = 2000;
+//                y = 3600;
+            }			
+            
+            playing.getPlayer().changeLoc(x, y);
+        }
             System.out.println("Object interacted");
-            p.x = 1500;
-            p.y = 2000;
-//            playing.getPlayer().
     }
+
     
 
 

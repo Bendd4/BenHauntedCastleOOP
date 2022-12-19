@@ -43,8 +43,8 @@ public class GameObject {
         doAnimation = true;
     }
 
-    protected void initHitbox(float x, float y, float width, float height){
-        hitbox = new Rectangle2D.Float(x,y,width,height);
+    protected void initHitbox(float x, float y, float height, float width){
+        hitbox = new Rectangle2D.Float(x,y,height,width);
     } 
 
     public void drawHitbox(Graphics g, int xLvlOffset,int yLvlOffset){

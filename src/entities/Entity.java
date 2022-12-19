@@ -33,4 +33,26 @@ public abstract class Entity {
         public Rectangle2D.Float getHitbox(){
             return hitbox;
         }
+
+        public float getX() {
+            return x;
+        }
+        public float getY() {
+            return y;
+        }
+
+        public void setX(float x) {
+            this.x = x;
+        }
+        public void setY(float y) {
+            this.y = y;
+        }
+        
+        public void changeLoc(int x, int y){
+            this.setX((float) x);
+            this.setY((float) y);
+        }
+
+        
+        
 }
