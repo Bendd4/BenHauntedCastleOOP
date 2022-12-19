@@ -15,14 +15,14 @@ public class Crabby extends Enemy {
     
 	public Crabby(float x, float y) {
 		super(x, y, CRABBY_WIDTH, CRABBY_HEIGHT, CRABBY);
-		initHitbox(x, y, (int) (22 * Game.SCALE), (int) (19 * Game.SCALE));
+		initHitbox(x, y, (int) (35 * Game.SCALE), (int) (63 * Game.SCALE));
                 initAttackBox();
 
 	}
         
         private void initAttackBox() {
-		attackBox = new Rectangle2D.Float(x, y, (int) (82 * Game.SCALE), (int) (19 * Game.SCALE));
-		attackBoxOffsetX = (int) (Game.SCALE * 30);
+		attackBox = new Rectangle2D.Float(x, y, (int) (65 * Game.SCALE), (int) (63 * Game.SCALE));
+		attackBoxOffsetX = (int) (Game.SCALE);
 	}
 
 	public void update(int[][] lvlData, Player player) {
@@ -33,7 +33,7 @@ public class Crabby extends Enemy {
 	}
         
         private void updateAttackBox() {
-		attackBox.x = hitbox.x - attackBoxOffsetX +25;
+		attackBox.x = hitbox.x - attackBoxOffsetX-12;
 		attackBox.y = hitbox.y;
 
 	}
@@ -51,11 +51,13 @@ public class Crabby extends Enemy {
                     case IDLE:
                            if(isPlayerInRange(player)){
                             turnTowardsPlayer(player);
+                              newState(RUNNING);
                             move(lvlData);
                         }
                        if(isPlayerCloseForAttack(player)){
                            
                            newState(ATTACK);
+                           
                        } 
                       
 //                        newState(RUNNING);
@@ -92,13 +94,13 @@ public class Crabby extends Enemy {
 	}
 
         public int flipX() {
-		if (walkDir == RIGHT)
+		if (walkDir == LEFT)
 			return width;
 		else
 			return 0;
 	}
         public int flipW() {
-		if (walkDir == RIGHT)
+		if (walkDir == LEFT)
 			return -1;
 		else
 			return 1;

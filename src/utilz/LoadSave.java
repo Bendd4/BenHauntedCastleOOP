@@ -17,7 +17,7 @@ import static utilz.Constants.EnemyConstants.CRABBY;
 import static utilz.Constants.ObjectConstants.*;
 
 public class LoadSave {
-	public static final String PLAYER_ATLAS = "player_sprites.png";
+	public static final String PLAYER_ATLAS = "player.png";
 	public static final String LEVEL_ATLAS = "level res/Sprite Sheet 1.png";
 	public static final String LEVEL_DATA = "level2_data.png";
 	public static final String TESTING_ROOM = "testing_room.png";
@@ -32,7 +32,7 @@ public class LoadSave {
 	public static final String OPTION_MENU = "options_background.png";
                 public static final String DEATH_SCREEN = "death_screen.png";
         
-	public static final String CRABBY_SPRITE = "crabby_sprite.png";
+	public static final String CRABBY_SPRITE = "player_sprites.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";	
@@ -91,7 +91,7 @@ public class LoadSave {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getBlue();
 				if (value == CRABBY)
-					list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+					list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE-28));
 			}
 		return list;
 
