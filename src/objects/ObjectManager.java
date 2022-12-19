@@ -50,19 +50,23 @@ public class ObjectManager {
                 if(p.getHitbox().intersects(attackbox)) {
                     System.out.println("use item");
                     p.setAnimation(true);
-                    // applyEffectToPlayer(p);
+                     applyEffectToPlayer(p);
                 }
             }
     }
 
     public void applyEffectToPlayer(Item i) {
         if(i.getObjType() == DOOR){
-            int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y;
-
+            int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y + 44;
             if (i == doors.get(0)){
-                x = 20000;
-//                y = 3600;
-            }			
+                x = 200;
+            }
+            else if (i == doors.get(1)){
+                x = 600;
+            }
+            else if (i == doors.get(2)){
+                x = 1000;
+            }
             
             playing.getPlayer().changeLoc(x, y);
         }
