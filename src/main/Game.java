@@ -53,7 +53,7 @@ public class Game extends JPanel implements Runnable {
 
 	private void initClasses() {
 		audioOptions = new AudioOptions(this);
-                audioPlayer = new AudioPlayer();
+                                audioPlayer = new AudioPlayer();
 		menu = new Menu(this);
 		levelManager = new LevelManager(this);
 		playing = new Playing(this);

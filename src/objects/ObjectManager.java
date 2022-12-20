@@ -54,10 +54,10 @@ public class ObjectManager {
             }
     }
 
-    public void checkObjectHit(Rectangle2D.Float attackbox) {
+    public void checkObjectHit(Rectangle2D.Float interactbox) {
         for(Door d : doors)
             if(d.isActive()) {
-                if(d.getHitbox().intersects(attackbox)) {
+                if(d.getHitbox().intersects(interactbox)) {
 //                    System.out.println("used a door");
                     d.setAnimation(true);
                      changePlayerLoc(d);
@@ -65,7 +65,7 @@ public class ObjectManager {
             }
         for(Chest c : chests)
             if(c.isActive()) {
-                if(c.getHitbox().intersects(attackbox)) {
+                if(c.getHitbox().intersects(interactbox)) {
 //                    System.out.println("opened a chest");
                     c.setAnimation(true);
                     c.setActive(false);
@@ -74,7 +74,7 @@ public class ObjectManager {
             }
         for(Item i : items){
             if(i.isActive()) {
-                if(i.getHitbox().intersects(attackbox)) {
+                if(i.getHitbox().intersects(interactbox)) {
 //                    System.out.println("Picked up an item");
                     i.setAnimation(true);
                     i.setActive(false);
@@ -205,6 +205,7 @@ public class ObjectManager {
                         score = 500;
                         break;
                     case ESCAPE:
+                        i.setActive(true);
                         playing.setGameComplete(true);
                         break;
                     default:

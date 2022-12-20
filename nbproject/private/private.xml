@@ -7,7 +7,7 @@
             <file>file:/F:/Github/BenHauntedCastleOOP/src/utilz/HelpMethods.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/objects/Item.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/entities/Enemy.java</file>
-            <file>file:/F:/Github/BenHauntedCastleOOP/src/gamestates/Menu.java</file>
+            <file>file:/F:/Github/BenHauntedCastleOOP/src/audio/AudioPlayer.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/ui/PauseButton.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/ui/PauseOverlay.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/ui/GameCompleteOverlay.java</file>
@@ -16,14 +16,13 @@
             <file>file:/F:/Github/BenHauntedCastleOOP/src/main/Game.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/gamestates/Playing.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/entities/EnemyManager.java</file>
-            <file>file:/F:/Github/BenHauntedCastleOOP/src/main/MainClass.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/objects/GameObject.java</file>
+            <file>file:/F:/Github/BenHauntedCastleOOP/src/entities/Knight.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/objects/Door.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/objects/Chest.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/utilz/Constants.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/gamestates/Gamestate.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/objects/ObjectManager.java</file>
-            <file>file:/F:/Github/BenHauntedCastleOOP/src/entities/Entity.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/ui/MenuButton.java</file>
             <file>file:/F:/Github/BenHauntedCastleOOP/src/ui/GameOverOverlay.java</file>
         </group>

@@ -1,5 +1,6 @@
     package gamestates;
 
+import audio.AudioPlayer;
 import entities.EnemyManager;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -42,6 +43,7 @@ public class Playing extends State implements Statemethods {
     private boolean gameOver;
     private boolean gameComplete;
     private boolean playerDying;
+    private AudioPlayer audioPlayer;
 
     public Playing(Game game) {
         super(game);
@@ -106,7 +108,6 @@ public class Playing extends State implements Statemethods {
         } else if (yLvlOffset < 0) {
             yLvlOffset = 0;
         }
-
     }
 
     @Override
@@ -120,6 +121,8 @@ public class Playing extends State implements Statemethods {
             pauseOverlay.draw(g);
         } else if (gameOver) {
             gameOverOverlay.draw(g);
+        } else if (gameComplete) {
+            gameCompleteOverlay.draw(g);
         }
     }
 
@@ -127,10 +130,12 @@ public class Playing extends State implements Statemethods {
         gameOver = false;
         paused = false;
         playerDying = false;
+        gameComplete = false;
         score = 0;
         player.resetAll();
         objectManager.resetAllObjects();
         enemyManager.resetAllEnemies();
+//        audioPlayer = new AudioPlayer();
 
     }
     
@@ -199,7 +204,9 @@ public class Playing extends State implements Statemethods {
     @Override
     public void mouseMoved(MouseEvent e) {
         if (!gameOver) {
-            if (paused) {
+            if (gameComplete){
+                gameCompleteOverlay.mouseMoved(e);
+            } else if (paused) {
                 pauseOverlay.mouseMoved(e);
             }
         } else {
@@ -241,7 +248,7 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (!gameOver)
+        if (!gameOver && !gameComplete)
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_W:
                     player.setUp(false);
@@ -263,6 +270,7 @@ public class Playing extends State implements Statemethods {
     }
 
     public void windowFocusLost() {
+//        paused = true;
         player.resetDirBooleans();
     }
 
@@ -272,7 +280,6 @@ public class Playing extends State implements Statemethods {
 
     public void setPlayerDying(boolean playerDying) {
         this.playerDying = playerDying;
-
     }
 
     public ObjectManager getObjectManager(){

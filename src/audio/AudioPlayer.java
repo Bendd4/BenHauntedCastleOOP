@@ -62,7 +62,7 @@ public class AudioPlayer {
             effects[i] = getClip(effectNames[i]);
         
         updateEffectsVolume();
-     )
+    }
         
     private Clip getClip(String name) {
         
@@ -106,8 +106,13 @@ public class AudioPlayer {
     }
     
     public void stopSong() {
-        if (songs[currentSongId].isActive())
+        if (songs[currentSongId].isActive()){
             songs[currentSongId].stop();
+        }
+//        else{
+//            currentSongId = 1;
+//            songs[currentSongId].start();
+//        }
     }
     
     public void setLevelSong(int lvlIndex) {

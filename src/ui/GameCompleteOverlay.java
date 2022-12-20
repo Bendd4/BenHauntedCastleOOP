@@ -35,7 +35,7 @@ public class GameCompleteOverlay {
 	}
 
 	private void createImg() {
-		img = LoadSave.getSpriteAtlas(LoadSave.DEATH_SCREEN);
+		img = LoadSave.getSpriteAtlas(LoadSave.LEVEL_COMPLETE);
 		imgW = (int) (img.getWidth() * Game.SCALE);
 		imgH = (int) (img.getHeight() * Game.SCALE / 1.15);
 		imgX = Game.GAME_WIDTH / 2 - imgW / 2;
