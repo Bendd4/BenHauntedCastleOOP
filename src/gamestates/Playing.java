@@ -264,8 +264,13 @@ public class Playing extends State implements Statemethods {
     public ObjectManager getObjectManager(){
         return objectManager;
     }
+    
     public void addScore(int score){
         this.score += score;
+        System.out.println("Score: " + this.score);
     }
+//    public int getScore(){
+//        return this.score;
+//    }
 
 }

@@ -14,6 +14,7 @@ import javax.swing.*;
 import main.Game;
 import objects.Chest;
 import objects.Door;
+import objects.Item;
 
 import static utilz.Constants.Directions.*;
 import static utilz.Constants.ObjectConstants.*;
@@ -90,7 +91,7 @@ public class LoadSave {
 		return lvlData;
 	}
 
-	public static ArrayList<Knight> GetCrabs() {
+	public static ArrayList<Knight> GetKnights() {
 		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 		ArrayList<Knight> list = new ArrayList<>();
@@ -139,21 +140,21 @@ public class LoadSave {
                       return chestList;
                 }
                 
-                public static ArrayList<Chest> GetItem(){
+                public static ArrayList<Item> GetItem(){
                       BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-                    ArrayList<Chest> chestList = new ArrayList<>();
+                    ArrayList<Item> itemList = new ArrayList<>();
                     for (int j = 0; j < img.getHeight(); j++){
                             for (int i = 0; i < img.getWidth(); i++) {
                                     Color color = new Color(img.getRGB(i, j));
                                     int value = color.getGreen();
                                     if (value == SHIELD || value == SWORD || value == PAINTING1 || value == PAINTING2 || value == SWORD ){
-                                        chestList.add(new Chest(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+                                        itemList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
                             }
                                     }
-                                    System.out.println("chest size :" + chestList.size());
-                                    return chestList;
+                                    System.out.println("chest size :" + itemList.size());
+                                    return itemList;
                 }
                   
                

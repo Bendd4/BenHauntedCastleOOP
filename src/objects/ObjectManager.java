@@ -37,7 +37,8 @@ public class ObjectManager {
     
     public void addObjects(){
         doors = LoadSave.GetDoor();
-         chests = LoadSave.GetChest();
+        chests = LoadSave.GetChest();
+        items = LoadSave.GetItem();
 //        LoadSave.Get
     }
     
@@ -66,14 +67,25 @@ public class ObjectManager {
                     System.out.println("chest");
                     c.setAnimation(true);
                     c.setActive(false);
-//                     applyEffectToPlayer(c);
+                    openChest();
                 }
             }
+        for(Item i : items){
+            if(i.isActive()) {
+                if(i.getHitbox().intersects(attackbox)) {
+                    System.out.println("chest");
+                    i.setAnimation(true);
+                    i.setActive(false);
+                    collectItem(i);
+                }
+            }
+        }
     }
 
     public void changePlayerLoc(Door i) {
         if(i.getObjType() == DOOR){
-            int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y + 33;
+//            int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y + 33;
+            int x, y;
             if (i == doors.get(0)){
                 x = (int) doors.get(9).hitbox.x + 15;
                 y = (int) doors.get(9).hitbox.y + 33;
@@ -165,10 +177,33 @@ public class ObjectManager {
             
             playing.getPlayer().changeLoc(x, y);
         }
-            System.out.println("Object interacted");
+//            System.out.println("Object interacted");
     }
-
     
+    private void openChest() {
+        int score = 10;
+//            if (c == chests.get(0)){
+//                score = 5;
+//            }
+//            
+//            else{
+//
+//            }
+            playing.addScore(score);
+    }
+    
+    
+    private void collectItem(Item i){
+        int score = 0;
+        if (i == items.get(0)){
+                score = 5;
+            }
+            
+        else{
+                score = 10;
+        }
+        playing.addScore(score);
+    }
 
 
     private void loadImgs() {
@@ -282,4 +317,6 @@ public class ObjectManager {
         for (Chest c : chests)
             c.reset();
     }
+
+
 }
