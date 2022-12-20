@@ -116,7 +116,10 @@ public class LoadSave {
                             for (int i = 0; i < img.getWidth(); i++) {
                                     Color color = new Color(img.getRGB(i, j));
                                     int value = color.getGreen();
-                                    if (value == 200){
+                                    if (value == DOOR){
+                                        doorList.add(new Door(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+                                    }
+                                    else if (value == ESCAPE){
                                         doorList.add(new Door(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
                             }
