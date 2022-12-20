@@ -12,10 +12,12 @@ public class Constants {
                 public static final int PAINTING1 = 170;
                 public static final int PAINTING2 = 175;
                 public static final int CROWN = 180;
-
                 
-	public static final int DOOR_WIDTH_DEFAULT = 72;
-                public static final int DOOR_HEIGHT_DEFAULT = 108;
+                public static final int ITEM_WIDTH_DEFAULT = 45;
+                public static final int ITEM_HEIGHT_DEFAULT = 45;
+                
+	public static final int DOOR_WIDTH_DEFAULT = 61;
+                public static final int DOOR_HEIGHT_DEFAULT = 96;
                 public static final int DOOR_WIDTH = (int) (DOOR_WIDTH_DEFAULT * Game.SCALE);
                 public static final int DOOR_HEIGHT = (int) (DOOR_HEIGHT_DEFAULT * Game.SCALE);
 
@@ -35,7 +37,7 @@ public class Constants {
 	}
 
 	public static class EnemyConstants {
-		public static final int CRABBY = 233;
+		public static final int KNIGHT = 233;
 
 	        public static final int IDLE = 0;
 		public static final int RUNNING = 9;
@@ -44,20 +46,20 @@ public class Constants {
 		public static final int HIT = 5;
 		public static final int ATTACK = 1;
 
-		public static final int CRABBY_WIDTH_DEFAULT = 132;
-		public static final int CRABBY_HEIGHT_DEFAULT = 86;
+		public static final int KNIGHT_WIDTH_DEFAULT = 132;
+		public static final int KNIGHT_HEIGHT_DEFAULT = 86;
 
-		public static final int CRABBY_WIDTH = (int) (CRABBY_WIDTH_DEFAULT * Game.SCALE);
-		public static final int CRABBY_HEIGHT = (int) (CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+		public static final int KNIGHT_WIDTH = (int) (KNIGHT_WIDTH_DEFAULT * Game.SCALE);
+		public static final int KNIGHT_HEIGHT = (int) (KNIGHT_HEIGHT_DEFAULT * Game.SCALE);
 
-		public static final int CRABBY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
-		public static final int CRABBY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
+		public static final int KNIGHT_DRAWOFFSET_X = (int) (26 * Game.SCALE);
+		public static final int KNIGHT_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
 
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 
 			
 			switch (enemy_type) {
-				case CRABBY:
+				case KNIGHT:
 					switch (enemy_state) {
                                             case RUNNING:
                                                     return 7;
@@ -85,7 +87,7 @@ public class Constants {
 
 		public static int GetMaxHealth(int enemy_type) {
 			switch (enemy_type) {
-				case CRABBY:
+				case KNIGHT:
 					return 10;
 
 				default:
@@ -95,7 +97,7 @@ public class Constants {
 
 		public static int GetEnemyDmg(int enemy_type) {
 			switch (enemy_type) {
-				case CRABBY:
+				case KNIGHT:
 					return 10;
 
 				default:

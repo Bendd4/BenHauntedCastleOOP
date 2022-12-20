@@ -14,7 +14,7 @@ public class Knight extends Enemy {
          private int attackBoxOffsetX;
     
 	public Knight(float x, float y) {
-		super(x, y, CRABBY_WIDTH, CRABBY_HEIGHT, CRABBY);
+		super(x, y, KNIGHT_WIDTH, KNIGHT_HEIGHT, KNIGHT);
 		initHitbox(x, y, (int) (35 * Game.SCALE), (int) (63 * Game.SCALE));
                 initAttackBox();
 

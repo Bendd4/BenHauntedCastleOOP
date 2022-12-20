@@ -16,8 +16,8 @@ import objects.Chest;
 import objects.Door;
 
 import static utilz.Constants.Directions.*;
-import static utilz.Constants.EnemyConstants.CRABBY;
 import static utilz.Constants.ObjectConstants.*;
+import static utilz.Constants.EnemyConstants.KNIGHT;
 
 
 public class LoadSave {
@@ -36,7 +36,7 @@ public class LoadSave {
 	public static final String OPTION_MENU = "options_background.png";
                 public static final String DEATH_SCREEN = "death_screen.png";
         
-	public static final String CRABBY_SPRITE = "player_sprites.png";
+	public static final String KNIGHT_SPRITE = "player_sprites.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
@@ -98,7 +98,7 @@ public class LoadSave {
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getBlue();
-				if (value == CRABBY)
+				if (value == KNIGHT)
 					list.add(new Knight(i * Game.TILES_SIZE, j * Game.TILES_SIZE-28));
 			}
 		return list;
@@ -148,7 +148,7 @@ public class LoadSave {
                                     Color color = new Color(img.getRGB(i, j));
                                     int value = color.getGreen();
                                     if (value == SHIELD || value == SWORD || value == PAINTING1 || value == PAINTING2 || value == SWORD ){
-                                        chestList.add(new Chest(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value, ));
+                                        chestList.add(new Chest(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
                             }
                                     }

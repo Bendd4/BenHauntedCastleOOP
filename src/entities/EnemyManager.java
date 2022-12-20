@@ -13,8 +13,8 @@ import static utilz.Constants.EnemyConstants.*;
 public class EnemyManager {
 
 	private Playing playing;
-	private BufferedImage[][] crabbyArr;
-	private ArrayList<Knight> crabbies = new ArrayList<>();
+	private BufferedImage[][] knightArr;
+	private ArrayList<Knight> knights = new ArrayList<>();
 
 	public EnemyManager(Playing playing) {
 		this.playing = playing;
@@ -23,12 +23,12 @@ public class EnemyManager {
 	}
 
 	private void addEnemies() {
-		crabbies = LoadSave.GetCrabs();
-		System.out.println("size of crabs: " + crabbies.size());
+		knights = LoadSave.GetCrabs();
+		System.out.println("size of crabs: " + knights.size());
 	}
 
 	public void update(int[][] lvlData,Player player) {
-		for (Knight c : crabbies)
+		for (Knight c : knights)
                     if(c.isActive())
 			c.update(lvlData, player);
 	}
@@ -38,12 +38,12 @@ public class EnemyManager {
 	}
 
 	private void drawCrabs(Graphics g, int xLvlOffset, int yLvlOffset) {
-		for (Knight c : crabbies){
+		for (Knight c : knights){
                     if(c.isActive()){
-			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], 
+			g.drawImage(knightArr[c.getEnemyState()][c.getAniIndex()], 
                                 (int) c.getHitbox().x - xLvlOffset-48 +c.flipX(), 
                                 (int) (c.getHitbox().y - yLvlOffset-20), 
-                                CRABBY_WIDTH *c.flipW(), CRABBY_HEIGHT, null);
+                                KNIGHT_WIDTH *c.flipW(), KNIGHT_HEIGHT, null);
                         c.drawAttackBox(g, xLvlOffset, yLvlOffset);
                         c.drawHitbox(g, xLvlOffset, yLvlOffset);
                     }
@@ -51,7 +51,7 @@ public class EnemyManager {
 	}
         
         public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		for (Knight c : crabbies)
+		for (Knight c : knights)
 			if (c.isActive())
 				if (attackBox.intersects(c.getHitbox())) {
 					c.hurt(0);
@@ -60,15 +60,15 @@ public class EnemyManager {
 	}
 
 	private void loadEnemyImgs() {
-		crabbyArr = new BufferedImage[10][7];
-		BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.CRABBY_SPRITE);
-		for (int j = 0; j < crabbyArr.length; j++)
-			for (int i = 0; i < crabbyArr[j].length; i++)
+		knightArr = new BufferedImage[10][7];
+		BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.KNIGHT_SPRITE);
+		for (int j = 0; j < knightArr.length; j++)
+			for (int i = 0; i < knightArr[j].length; i++)
                             
-				crabbyArr[j][i] = temp.getSubimage(i * CRABBY_WIDTH_DEFAULT, j * CRABBY_HEIGHT_DEFAULT, CRABBY_WIDTH_DEFAULT, CRABBY_HEIGHT_DEFAULT);
+				knightArr[j][i] = temp.getSubimage(i * KNIGHT_WIDTH_DEFAULT, j * KNIGHT_HEIGHT_DEFAULT, KNIGHT_WIDTH_DEFAULT, KNIGHT_HEIGHT_DEFAULT);
 	}
         public void resetAllEnemies() {
-		for (Knight c : crabbies)
+		for (Knight c : knights)
 			c.resetEnemy();
 	}
 }

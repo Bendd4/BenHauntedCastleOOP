@@ -28,14 +28,14 @@ public class Playing extends State implements Statemethods {
     private boolean paused = false;
 
     private int xLvlOffset;
-    private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
-    private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
+    private int leftBorder = (int) (0.3 * Game.GAME_WIDTH);
+    private int rightBorder = (int) (0.7 * Game.GAME_WIDTH);
     private int lvlWidth = LoadSave.GetLevelData()[0].length;
     private int maxXOffset = (lvlWidth - Game.TILES_IN_WIDTH) * Game.TILES_SIZE;
 
     private int yLvlOffset;
-    private int topBorder = (int) (0.3 * Game.GAME_HEIGHT);
-    private int bottBorder = (int) (0.7 * Game.GAME_HEIGHT);
+    private int topBorder = (int) (0.5 * Game.GAME_HEIGHT);
+    private int bottBorder = (int) (0.5 * Game.GAME_HEIGHT);
     private int lvlHeight = LoadSave.GetLevelData().length;
     private int maxYOffset = (lvlHeight - Game.TILES_IN_HEIGHT) * Game.TILES_SIZE;
 
@@ -123,6 +123,7 @@ public class Playing extends State implements Statemethods {
         gameOver = false;
         paused = false;
         playerDying = false;
+        score = 0;
         player.resetAll();
         objectManager.resetAllObjects();
         enemyManager.resetAllEnemies();
@@ -263,7 +264,7 @@ public class Playing extends State implements Statemethods {
     public ObjectManager getObjectManager(){
         return objectManager;
     }
-    public void changeScore(int score){
+    public void addScore(int score){
         this.score += score;
     }
 

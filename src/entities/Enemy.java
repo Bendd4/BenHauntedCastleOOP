@@ -89,7 +89,7 @@ public abstract class Enemy extends Entity {
         protected boolean isPlayerInRange(Player player) {
                         if (Math.abs(player.hitbox.y - hitbox.y) < 1){
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
-		return absValue <= attackDistance * 5;
+		return absValue <= attackDistance * 3;
                         }
                         else{
                             return false;
