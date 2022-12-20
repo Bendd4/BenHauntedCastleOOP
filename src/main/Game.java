@@ -6,6 +6,7 @@ import ui.AudioOptions;
 
 import java.awt.Graphics;
 
+import audio.AudioPlayer;
 import gamestates.GameOptions;
 import gamestates.Gamestate;
 import gamestates.Menu;
@@ -27,6 +28,7 @@ public class Game extends JPanel implements Runnable {
 	private Menu menu;
 	private GameOptions gameOptions;
 	private AudioOptions audioOptions;
+	private AudioPlayer audioPlayer;
 
 	public final static int TILES_DEFAULT_SIZE = 36;
 	public final static float SCALE = 1f;
@@ -50,12 +52,12 @@ public class Game extends JPanel implements Runnable {
 	}
 
 	private void initClasses() {
-		audioOptions = new AudioOptions();
+		audioOptions = new AudioOptions(this);
+                audioPlayer = new AudioPlayer();
 		menu = new Menu(this);
 		levelManager = new LevelManager(this);
 		playing = new Playing(this);
 		gameOptions = new GameOptions(this);
-                
 	}
 
 	private void startGameLoop() {
@@ -162,4 +164,8 @@ public class Game extends JPanel implements Runnable {
 	public AudioOptions getAudioOption() {
 		return audioOptions;
 	}
+	
+	public AudioPlayer getAudioPlayer() {
+                return audioPlayer;
+        }
 }
