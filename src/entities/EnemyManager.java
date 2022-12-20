@@ -14,7 +14,7 @@ public class EnemyManager {
 
 	private Playing playing;
 	private BufferedImage[][] crabbyArr;
-	private ArrayList<Crabby> crabbies = new ArrayList<>();
+	private ArrayList<Knight> crabbies = new ArrayList<>();
 
 	public EnemyManager(Playing playing) {
 		this.playing = playing;
@@ -28,7 +28,7 @@ public class EnemyManager {
 	}
 
 	public void update(int[][] lvlData,Player player) {
-		for (Crabby c : crabbies)
+		for (Knight c : crabbies)
                     if(c.isActive())
 			c.update(lvlData, player);
 	}
@@ -38,7 +38,7 @@ public class EnemyManager {
 	}
 
 	private void drawCrabs(Graphics g, int xLvlOffset, int yLvlOffset) {
-		for (Crabby c : crabbies){
+		for (Knight c : crabbies){
                     if(c.isActive()){
 			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], 
                                 (int) c.getHitbox().x - xLvlOffset-48 +c.flipX(), 
@@ -51,7 +51,7 @@ public class EnemyManager {
 	}
         
         public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		for (Crabby c : crabbies)
+		for (Knight c : crabbies)
 			if (c.isActive())
 				if (attackBox.intersects(c.getHitbox())) {
 					c.hurt(0);
@@ -68,7 +68,7 @@ public class EnemyManager {
 				crabbyArr[j][i] = temp.getSubimage(i * CRABBY_WIDTH_DEFAULT, j * CRABBY_HEIGHT_DEFAULT, CRABBY_WIDTH_DEFAULT, CRABBY_HEIGHT_DEFAULT);
 	}
         public void resetAllEnemies() {
-		for (Crabby c : crabbies)
+		for (Knight c : crabbies)
 			c.resetEnemy();
 	}
 }

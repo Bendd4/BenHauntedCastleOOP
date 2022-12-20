@@ -132,14 +132,14 @@ public class Player extends Entity {
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
         g.drawImage(animations[playerAction][aniIndex],
                 (int) (hitbox.x - xDrawOffset) - xLvlOffset + flipX,
-                (int) (hitbox.y - yDrawOffset) - yLvlOffset-14,
+                (int) (hitbox.y - yDrawOffset) - yLvlOffset-17,
                 width * flipW, height, null);
         drawHitbox(g, xLvlOffset, yLvlOffset);
-        drawAttackBox(g, xLvlOffset, yLvlOffset);
+        drawInteractBox(g, xLvlOffset, yLvlOffset);
         drawUI(g);
     }
 
-    private void drawAttackBox(Graphics g, int lvlOffsetX, int yLvlOffset) {
+    private void drawInteractBox(Graphics g, int lvlOffsetX, int yLvlOffset) {
         g.setColor(Color.red);
         g.drawRect((int) attackBox.x - lvlOffsetX, (int) attackBox.y - yLvlOffset, (int) attackBox.width,
                 (int) attackBox.height);

@@ -5,24 +5,33 @@ import main.Game;
 public class Constants {
 
 	public static class ObjectConstants	{
-		public static final int DOOR = 200;
+	public static final int DOOR = 200;
                 public static final int CHEST = 133;
+                public static final int SHIELD = 150;
+                public static final int SWORD = 160;
+                public static final int PAINTING1 = 170;
+                public static final int PAINTING2 = 175;
+                public static final int CROWN = 180;
 
-		public static final int DOOR_VALUE = 100;
+                
+	public static final int DOOR_WIDTH_DEFAULT = 72;
+                public static final int DOOR_HEIGHT_DEFAULT = 108;
+                public static final int DOOR_WIDTH = (int) (DOOR_WIDTH_DEFAULT * Game.SCALE);
+                public static final int DOOR_HEIGHT = (int) (DOOR_HEIGHT_DEFAULT * Game.SCALE);
 
-		public static final int DOOR_WIDTH_DEFAULT = 72;
-		public static final int DOOR_HEIGHT_DEFAULT = 108;
-		public static final int DOOR_WIDTH = (int) (DOOR_WIDTH_DEFAULT * Game.SCALE);
-		public static final int DOOR_HEIGHT = (int) (DOOR_HEIGHT_DEFAULT * Game.SCALE);
+                public static int GetSpriteAmount(int object_type) {
+                    switch (object_type) {
+                        case DOOR:
+                            return 7;
+                    }
 
-		public static int GetSpriteAmount(int object_type) {
-			switch (object_type) {
-				case DOOR:	
-					return 7;
-			}
-
-			return 1;
-		}
+                    return 1;
+                }
+                
+                public static final int CHEST_WIDTH_DEFAULT = 28;
+	public static final int CHEST_HEIGHT_DEFAULT = 47;
+	public static final int CHEST_WIDTH = (int) (CHEST_WIDTH_DEFAULT * Game.SCALE);
+	public static final int CHEST_HEIGHT = (int) (CHEST_HEIGHT_DEFAULT * Game.SCALE);
 	}
 
 	public static class EnemyConstants {
@@ -87,7 +96,7 @@ public class Constants {
 		public static int GetEnemyDmg(int enemy_type) {
 			switch (enemy_type) {
 				case CRABBY:
-					return 15;
+					return 10;
 
 				default:
 					return 1;

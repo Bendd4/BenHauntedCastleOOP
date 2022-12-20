@@ -16,7 +16,7 @@ public class ObjectManager {
 //    private BufferedImage[][] potionImgs;
     private BufferedImage doorImgs;
     private BufferedImage chestImgs;
-    private ArrayList<Item> doors;
+    private ArrayList<Door> doors;
     private ArrayList<Chest> chests;
     private BufferedImage[] chestSprite;
 
@@ -37,7 +37,7 @@ public class ObjectManager {
     }
     
     public void checkObjectTouched(Rectangle2D.Float hitbox) {
-        for(Item p : doors)
+        for(Door p : doors)
             if(p.isActive()) {
                 if(hitbox.intersects(p.getHitbox())) {
 //                    p.setActive(false);
@@ -47,7 +47,7 @@ public class ObjectManager {
     }
 
     public void checkObjectHit(Rectangle2D.Float attackbox) {
-        for(Item p : doors)
+        for(Door p : doors)
             if(p.isActive()) {
                 if(p.getHitbox().intersects(attackbox)) {
                     System.out.println("door");
@@ -66,19 +66,17 @@ public class ObjectManager {
             }
     }
 
-    public void applyEffectToPlayer(Item i) {
+    public void applyEffectToPlayer(Door i) {
         if(i.getObjType() == DOOR){
             int x = (int) i.getHitbox().x, y = (int) i.getHitbox().y + 44;
             if (i == doors.get(2)){
-//                x = 200;
+
             }
             else if (i == doors.get(5)){
-//                x = 600;
+
             }
             else if (i == doors.get(8)){
-//                y = 510;
                 y = (int) doors.get(5).hitbox.y + DOOR_HEIGHT/3 + 6;
-//             x = 1000;
             }
             
             playing.getPlayer().changeLoc(x, y);
@@ -105,7 +103,7 @@ public class ObjectManager {
     }
 
     public void update() {
-        for (Item p : doors)
+        for (Door p : doors)
             if(p.isActive())
                 p.update();
     }
@@ -117,12 +115,9 @@ public class ObjectManager {
     }
 
     private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
-        for (Item door : doors){
+        for (Door door : doors){
             if(door.isActive()) {
-                int type = 0;
                 if(door.getObjType() == DOOR)
-                    type = 1;
-                
 //                g.drawImage(doorImgs[type][p.getAniIndex()],
                 g.drawImage(doorImgs,
                  (int) ((door.getHitbox().x) - door.getxDrawOffset() - xLvlOffset), 
@@ -147,8 +142,9 @@ public class ObjectManager {
 //                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
                  (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
-                 (int) (49*Game.SCALE), 
-                 (int) (49*Game.SCALE),
+                 (int) (CHEST_HEIGHT),
+                 (int) (CHEST_WIDTH), 
+
                  
                  null);
                 chest.drawHitbox(g, xLvlOffset, yLvlOffset);
@@ -160,8 +156,8 @@ public class ObjectManager {
 //                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
                  (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
-                 (int) (49*Game.SCALE), 
-                 (int) (49*Game.SCALE),
+                 (int) (CHEST_HEIGHT),
+                 (int) (CHEST_WIDTH), 
                  
                  null);
                 chest.drawHitbox(g, xLvlOffset, yLvlOffset);
@@ -169,9 +165,27 @@ public class ObjectManager {
 //            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
         }
     }
+    
+    private void drawItem(Graphics g, int xLvlOffset, int yLvlOffset) {
+        for (Item door : doors){
+            if(door.isActive()) {
+                if(door.getObjType() == DOOR)
+//                g.drawImage(doorImgs[type][p.getAniIndex()],
+                g.drawImage(doorImgs,
+                 (int) ((door.getHitbox().x) - door.getxDrawOffset() - xLvlOffset), 
+                 (int) ((door.getHitbox().y) - door.getyDrawOffset() - yLvlOffset), 
+                 DOOR_WIDTH, 
+                 DOOR_HEIGHT, 
+                 null);
+                door.drawHitbox(g, xLvlOffset, yLvlOffset);
+            }
+            
+//            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
+        }
+    }
 
     public void resetAllObjects() {
-        for (Item p : doors)
+        for (Door p : doors)
             p.reset();
         for (Chest c : chests)
             c.reset();

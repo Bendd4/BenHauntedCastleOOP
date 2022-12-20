@@ -1,7 +1,7 @@
 package utilz;
 
 //import java.awt.Graphics;
-import entities.Crabby;
+import entities.Knight;
 import java.awt.Color;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +13,7 @@ import java.net.URL;
 import javax.swing.*;
 import main.Game;
 import objects.Chest;
-import objects.Item;
+import objects.Door;
 
 import static utilz.Constants.Directions.*;
 import static utilz.Constants.EnemyConstants.CRABBY;
@@ -40,10 +40,10 @@ public class LoadSave {
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
-        public static final String CHEST_IMG = "chest.png";
+                public static final String CHEST_IMG = "chest.png";
         
-                public static final String SHIELD1_IMG = "level res/Objects/Shield (1).png";
-                public static final String SHIELD2_IMG = "level res/Objects/Shield (2).png";
+                public static final String SHIELD_IMG = "level res/Objects/Shield (1).png";
+                public static final String SWORD_IMG = "level res/Objects/Sword (1).png";
                 
                 public static final String CROWN_IMG = "level res/Objects/Crown.png";
                 
@@ -58,7 +58,7 @@ public class LoadSave {
 			e.printStackTrace();
 		} finally {
 			try {
-				// System.out.println("Wrong file location, probably.");
+				// If an error occoured here, you probably put the file in the wrong place
 				is.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -80,10 +80,6 @@ public class LoadSave {
 
 				// Components will be in the range of 0..255:
 				int mapValue = (color & 0xff0000) >> 16; // Red
-				// System.out.println(mapValue);
-
-				// Color color = new Color(img.getRGB(i, j));
-				// int value = (int) color.getRed();
 
 				if (mapValue >= 130) {
 					mapValue = 98;
@@ -94,56 +90,66 @@ public class LoadSave {
 		return lvlData;
 	}
 
-	public static ArrayList<Crabby> GetCrabs() {
+	public static ArrayList<Knight> GetCrabs() {
 		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-		ArrayList<Crabby> list = new ArrayList<>();
+		ArrayList<Knight> list = new ArrayList<>();
 		for (int j = 0; j < img.getHeight(); j++)
 			for (int i = 0; i < img.getWidth(); i++) {
 				Color color = new Color(img.getRGB(i, j));
 				int value = color.getBlue();
 				if (value == CRABBY)
-					list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE-28));
+					list.add(new Knight(i * Game.TILES_SIZE, j * Game.TILES_SIZE-28));
 			}
 		return list;
 
 	}
         
-                public static ArrayList<Item> GetDoor(){
+                public static ArrayList<Door> GetDoor(){
                       BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-                    ArrayList<Item> doorList = new ArrayList<>();
-                                    int time = 0;
+                    ArrayList<Door> doorList = new ArrayList<>();
                     for (int j = 0; j < img.getHeight(); j++){
                             for (int i = 0; i < img.getWidth(); i++) {
                                     Color color = new Color(img.getRGB(i, j));
                                     int value = color.getGreen();
                                     if (value == 200){
-                                        time++;
-                                        System.out.println("Number of time door was added: " + time);
-                                        System.out.println(i + " : " + j);
-                                    doorList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
-                                                                    }
-                            }
+                                        doorList.add(new Door(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
-                                    System.out.println("Door size :" + doorList.size());
-                                    return doorList;
+                            }
+                    }
+                    System.out.println("Number of doors :" + doorList.size());
+                    return doorList;
                 }
-                  public static ArrayList<Chest> GetChest(){
+                
+                public static ArrayList<Chest> GetChest(){
                       BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
                     ArrayList<Chest> chestList = new ArrayList<>();
-                                    int time = 0;
                     for (int j = 0; j < img.getHeight(); j++){
                             for (int i = 0; i < img.getWidth(); i++) {
                                     Color color = new Color(img.getRGB(i, j));
                                     int value = color.getGreen();
-                                    if (value == 133){
-                                        time++;
-                                        System.out.println("Number of time chest was added: " + time);
-                                        System.out.println(i + " : " + j);
+                                    if (value == CHEST){
                                     chestList.add(new Chest(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
-                                                                    }
+                                    }
+                            }
+                     }
+                      System.out.println("Number of chest :" + chestList.size());
+                      return chestList;
+                }
+                
+                public static ArrayList<Chest> GetItem(){
+                      BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+                    ArrayList<Chest> chestList = new ArrayList<>();
+                    for (int j = 0; j < img.getHeight(); j++){
+                            for (int i = 0; i < img.getWidth(); i++) {
+                                    Color color = new Color(img.getRGB(i, j));
+                                    int value = color.getGreen();
+                                    if (value == SHIELD || value == SWORD || value == PAINTING1 || value == PAINTING2 || value == SWORD ){
+                                        chestList.add(new Chest(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value, ));
+                                    }
                             }
                                     }
                                     System.out.println("chest size :" + chestList.size());

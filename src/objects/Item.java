@@ -5,10 +5,10 @@ import static utilz.Constants.ObjectConstants.*;
 
 public class Item extends GameObject {
 
-    public Item(int x, int y, int objType) {
+    public Item(int x, int y, int objType, int HEIGHT, int WIDTH) {
         super(x, y, objType);
         doAnimation = true;
-        initHitbox(x, y - DOOR_WIDTH, DOOR_HEIGHT, DOOR_WIDTH);
+        initHitbox(x, y - 10, HEIGHT + 20, WIDTH);
         xDrawOffset = (int) (1* Game.SCALE);
         yDrawOffset = (int) (1* Game.SCALE);
     }
