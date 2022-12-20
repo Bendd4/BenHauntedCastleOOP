@@ -38,7 +38,7 @@ public class LoadSave {
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
-        public static final String CHEST_IMG = "level res/Objects/IronChest (2).png";
+        public static final String CHEST_IMG = "chest.png";
         
                 public static final String SHIELD1_IMG = "level res/Objects/Shield (1).png";
                 public static final String SHIELD2_IMG = "level res/Objects/Shield (2).png";

@@ -44,7 +44,7 @@ public class GameObject {
     }
 
     protected void initHitbox(float x, float y, float height, float width){
-        hitbox = new Rectangle2D.Float(x,y,height,width);
+        hitbox = new Rectangle2D.Float(x,y,width,height);
     } 
 
     public void drawHitbox(Graphics g, int xLvlOffset,int yLvlOffset){

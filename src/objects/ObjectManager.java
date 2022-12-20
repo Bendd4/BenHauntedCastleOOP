@@ -18,6 +18,7 @@ public class ObjectManager {
     private BufferedImage chestImgs;
     private ArrayList<Item> doors;
     private ArrayList<Chest> chests;
+    private BufferedImage[] chestSprite;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
@@ -59,6 +60,7 @@ public class ObjectManager {
                 if(c.getHitbox().intersects(attackbox)) {
                     System.out.println("chest");
                     c.setAnimation(true);
+                    c.setActive(false);
 //                     applyEffectToPlayer(c);
                 }
             }
@@ -92,13 +94,14 @@ public class ObjectManager {
         doorImgs = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
         chestImgs = LoadSave.getSpriteAtlas(LoadSave.CHEST_IMG);
 
-//        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
-//        potionImgs = new BufferedImage[2][7];
+       
+        chestSprite = new BufferedImage[2];
 
 //        for (int j = 0; j < potionImgs.length; j++)
 //            for (int i = 0; i < potionImgs[j].length; i++)
 //                potionImgs[j][i] = potionSprite.getSubimage(12 * i, 16 * j, 12, 16);
-
+         chestSprite[0] = chestImgs.getSubimage(0 , 40 , 74, 40);
+         chestSprite[1] = chestImgs.getSubimage(74 , 40 , 74, 40);
     }
 
     public void update() {
@@ -140,12 +143,25 @@ public class ObjectManager {
                 if(chest.getObjType() == CHEST)
                     type = 1;
                 
-//                g.drawImage(chestImgs[type][p.getAniIndex()],
-                g.drawImage(chestImgs,
+                g.drawImage(chestSprite[1],
+//                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
                  (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
-                 (int) (50*Game.SCALE), 
-                 (int) (50*Game.SCALE),
+                 (int) (49*Game.SCALE), 
+                 (int) (49*Game.SCALE),
+                 
+                 null);
+                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
+            }
+             if(!chest.isActive()) {
+               
+                
+                g.drawImage(chestSprite[0],
+//                g.drawImage(chestImgs,
+                 (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
+                 (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
+                 (int) (49*Game.SCALE), 
+                 (int) (49*Game.SCALE),
                  
                  null);
                 chest.drawHitbox(g, xLvlOffset, yLvlOffset);
@@ -157,5 +173,7 @@ public class ObjectManager {
     public void resetAllObjects() {
         for (Item p : doors)
             p.reset();
+        for (Chest c : chests)
+            c.reset();
     }
 }

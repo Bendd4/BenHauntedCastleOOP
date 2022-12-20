@@ -5,8 +5,7 @@
 package objects;
 
 import main.Game;
-import static utilz.Constants.ObjectConstants.DOOR_HEIGHT;
-import static utilz.Constants.ObjectConstants.DOOR_WIDTH;
+
 
 /**
  *
@@ -17,7 +16,7 @@ public class Chest extends GameObject{
     public Chest(int x, int y, int objType) {
       super(x, y, objType);
         doAnimation = true;
-        initHitbox(x, y-9, 50, 50);
+        initHitbox(x, y-9, 50*Game.SCALE, 50*Game.SCALE);
         xDrawOffset = (int) (1* Game.SCALE);
         yDrawOffset = (int) (1* Game.SCALE);
     }
