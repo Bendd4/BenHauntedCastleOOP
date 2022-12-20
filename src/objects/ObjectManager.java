@@ -190,12 +190,25 @@ public class ObjectManager {
     
     private void collectItem(Item i){
         int score = 0;
-        if (i == items.get(0)){
-                score = 5;
-            }
-        else{
-                score = 10;
-        }
+        switch (i.getObjType()) {
+                    case SHIELD:
+                        score = 50;
+                        break;
+                    case SWORD:
+                        score = 25;
+                        break;
+                    case PAINTING1:
+                        score = 100;
+                        break;
+                    case PAINTING2:
+                        score = 100;
+                        break;
+                    case CROWN:
+                        score = 500;
+                        break;
+                    default:
+                        break;
+                }
         playing.addScore(score);
     }
 
@@ -286,40 +299,40 @@ public class ObjectManager {
                         g.drawImage(shieldImgs,
                                 (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
                                 (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
-                                ITEM_WIDTH_DEFAULT,
-                                ITEM_HEIGHT_DEFAULT,
+                                ITEM_WIDTH,
+                                ITEM_HEIGHT,
                                 null);
                         break;
                     case SWORD:
                         g.drawImage(swordImgs,
                                 (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
                                 (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
-                                ITEM_WIDTH_DEFAULT,
-                                ITEM_HEIGHT_DEFAULT,
+                                ITEM_WIDTH,
+                                ITEM_HEIGHT,
                                 null);
                         break;
                     case PAINTING1:
                         g.drawImage(painting1Imgs,
                                 (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
                                 (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
-                                ITEM_WIDTH_DEFAULT,
-                                ITEM_HEIGHT_DEFAULT,
+                                ITEM_WIDTH,
+                                ITEM_HEIGHT,
                                 null);
                         break;
                     case PAINTING2:
                         g.drawImage(painting2Imgs,
                                 (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
                                 (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
-                                ITEM_WIDTH_DEFAULT,
-                                ITEM_HEIGHT_DEFAULT,
+                                ITEM_WIDTH,
+                                ITEM_HEIGHT,
                                 null);
                         break;
                     case CROWN:
                         g.drawImage(crownImgs,
                                 (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
                                 (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
-                                CROWN_WIDTH_DEFAULT,
-                                CROWN_HEIGHT_DEFAULT,
+                                CROWN_WIDTH,
+                                CROWN_HEIGHT,
                                 null);
                         break;
                     default:

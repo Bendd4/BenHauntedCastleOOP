@@ -24,7 +24,6 @@ public class GameObject {
     }
 
     protected void updateAnimationTick() {
-            
 		aniTick++;
 		if (aniTick >= aniSpeed) {
 			aniTick = 0;

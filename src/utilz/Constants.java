@@ -13,11 +13,11 @@ public class Constants {
                 public static final int PAINTING2 = 175;
                 public static final int CROWN = 180;
                 
-                public static final int ITEM_WIDTH_DEFAULT = 45;
-                public static final int ITEM_HEIGHT_DEFAULT = 60;
+                public static final int ITEM_WIDTH = (int) (45 * Game.SCALE);
+                public static final int ITEM_HEIGHT = (int) (60 * Game.SCALE);
                 
-                public static final int CROWN_WIDTH_DEFAULT = 45;
-                public static final int CROWN_HEIGHT_DEFAULT = 40;
+                public static final int CROWN_WIDTH = (int) (45 * Game.SCALE);
+                public static final int CROWN_HEIGHT = (int) (40 * Game.SCALE);
                 
 	public static final int DOOR_WIDTH_DEFAULT = 61;
                 public static final int DOOR_HEIGHT_DEFAULT = 96;
