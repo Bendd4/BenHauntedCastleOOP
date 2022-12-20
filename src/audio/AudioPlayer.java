@@ -62,6 +62,7 @@ public class AudioPlayer {
             effects[i] = getClip(effectNames[i]);
         
         updateEffectsVolume();
+     )
         
     private Clip getClip(String name) {
         
