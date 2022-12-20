@@ -95,7 +95,10 @@ public class GamePanel extends JPanel {
                  if (Gamestate.state == Gamestate.PLAYING) {
                      game.getPlaying().getScore();
 			 jl1.setText(game.getPlaying().getScore()+"");
-                         System.out.println("haha");
+		}
+                 else if (Gamestate.state == Gamestate.MENU) {
+			 jl1.setText("");
+                         
 		}
                  
 
