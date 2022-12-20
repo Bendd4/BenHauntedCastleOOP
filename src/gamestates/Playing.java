@@ -14,9 +14,12 @@ import objects.ObjectManager;
 import ui.GameOverOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
-
+import javax.swing.*;
+    
 public class Playing extends State implements Statemethods {
     private Player player;
+    private JLabel jl;
+    private int score = 0;
     private LevelManager levelManager;
     private EnemyManager enemyManager;
     private ObjectManager objectManager;
@@ -259,6 +262,9 @@ public class Playing extends State implements Statemethods {
 
     public ObjectManager getObjectManager(){
         return objectManager;
+    }
+    public void changeScore(int score){
+        this.score += score;
     }
 
 }

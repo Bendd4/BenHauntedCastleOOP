@@ -3,12 +3,14 @@ package utilz;
 //import java.awt.Graphics;
 import entities.Crabby;
 import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-
+import java.net.URL;
+import javax.swing.*;
 import main.Game;
 import objects.Chest;
 import objects.Item;
@@ -147,4 +149,19 @@ public class LoadSave {
                                     System.out.println("chest size :" + chestList.size());
                                     return chestList;
                 }
+                  
+               
+//                   public static Font LoadFont() {
+//                        // This font is < 35Kb.
+//                        URL fontUrl = new URL("http://www.webpagepublicity.com/" +
+//                            "free-fonts/a/Airacobra%20Condensed.ttf");
+//                        Font font = Font.createFont(Font.TRUETYPE_FONT, fontUrl.openStream());
+//                        GraphicsEnvironment ge = 
+//                            GraphicsEnvironment.getLocalGraphicsEnvironment();
+//                        ge.registerFont(font);
+//                        JList fonts = new JList( ge.getAvailableFontFamilyNames() );
+//                         JOptionPane.showMessageDialog(null, new JScrollPane(fonts));
+//
+//                    }
+
 }
