@@ -15,20 +15,23 @@ public class ObjectManager {
     private Playing playing;
 //    private BufferedImage[][] potionImgs;
     private BufferedImage doorImgs;
+    private BufferedImage chestImgs;
     private ArrayList<Item> doors;
+    private ArrayList<Chest> chests;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
         loadImgs();
-        doors = LoadSave.GetDoor();
+       
 //        System.out.println(doors);
-//        addObjects();
+        addObjects();
         
 //        door = new ArrayList<>();
     }
     
     public void addObjects(){
         doors = LoadSave.GetDoor();
+         chests = LoadSave.GetChest();
 //        LoadSave.Get
     }
     
@@ -46,9 +49,17 @@ public class ObjectManager {
         for(Item p : doors)
             if(p.isActive()) {
                 if(p.getHitbox().intersects(attackbox)) {
-                    System.out.println("use item");
+                    System.out.println("door");
                     p.setAnimation(true);
                      applyEffectToPlayer(p);
+                }
+            }
+        for(Chest c : chests)
+            if(c.isActive()) {
+                if(c.getHitbox().intersects(attackbox)) {
+                    System.out.println("chest");
+                    c.setAnimation(true);
+//                     applyEffectToPlayer(c);
                 }
             }
     }
@@ -79,6 +90,7 @@ public class ObjectManager {
     private void loadImgs() {
 
         doorImgs = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
+        chestImgs = LoadSave.getSpriteAtlas(LoadSave.CHEST_IMG);
 
 //        BufferedImage potionSprite = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
 //        potionImgs = new BufferedImage[2][7];
@@ -97,6 +109,8 @@ public class ObjectManager {
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         drawDoors(g, xLvlOffset, yLvlOffset);
+        drawChests(g, xLvlOffset, yLvlOffset);
+        
     }
 
     private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -113,6 +127,28 @@ public class ObjectManager {
                  DOOR_WIDTH, 
                  DOOR_HEIGHT, 
                  null);
+                door.drawHitbox(g, xLvlOffset, yLvlOffset);
+            }
+            
+//            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
+        }
+    }
+    private void drawChests(Graphics g, int xLvlOffset, int yLvlOffset) {
+        for (Chest chest : chests){
+            if(chest.isActive()) {
+                int type = 0;
+                if(chest.getObjType() == CHEST)
+                    type = 1;
+                
+//                g.drawImage(chestImgs[type][p.getAniIndex()],
+                g.drawImage(chestImgs,
+                 (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
+                 (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
+                 (int) (50*Game.SCALE), 
+                 (int) (50*Game.SCALE),
+                 
+                 null);
+                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
 //            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
         }

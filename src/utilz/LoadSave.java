@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import main.Game;
+import objects.Chest;
 import objects.Item;
 
 import static utilz.Constants.Directions.*;
@@ -37,6 +38,7 @@ public class LoadSave {
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
+        public static final String CHEST_IMG = "level res/Objects/IronChest (2).png";
         
                 public static final String SHIELD1_IMG = "level res/Objects/Shield (1).png";
                 public static final String SHIELD2_IMG = "level res/Objects/Shield (2).png";
@@ -108,21 +110,41 @@ public class LoadSave {
                 public static ArrayList<Item> GetDoor(){
                       BufferedImage img = getSpriteAtlas(LEVEL_DATA);
 //                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
-		ArrayList<Item> doorList = new ArrayList<>();
-                                int time = 0;
-		for (int j = 0; j < img.getHeight(); j++){
-			for (int i = 0; i < img.getWidth(); i++) {
-				Color color = new Color(img.getRGB(i, j));
-				int value = color.getGreen();
-				if (value == 200){
-                                                                                time++;
-                                                                                System.out.println("Number of time door was added: " + time);
-                                                                                System.out.println(i + " : " + j);
-					doorList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
-                                                                }
-			}
-                                }
-                                System.out.println("Door size :" + doorList.size());
-                                return doorList;
+                    ArrayList<Item> doorList = new ArrayList<>();
+                                    int time = 0;
+                    for (int j = 0; j < img.getHeight(); j++){
+                            for (int i = 0; i < img.getWidth(); i++) {
+                                    Color color = new Color(img.getRGB(i, j));
+                                    int value = color.getGreen();
+                                    if (value == 200){
+                                        time++;
+                                        System.out.println("Number of time door was added: " + time);
+                                        System.out.println(i + " : " + j);
+                                    doorList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+                                                                    }
+                            }
+                                    }
+                                    System.out.println("Door size :" + doorList.size());
+                                    return doorList;
+                }
+                  public static ArrayList<Chest> GetChest(){
+                      BufferedImage img = getSpriteAtlas(LEVEL_DATA);
+//                                BufferedImage img = getSpriteAtlas(TESTING_ROOM);
+                    ArrayList<Chest> chestList = new ArrayList<>();
+                                    int time = 0;
+                    for (int j = 0; j < img.getHeight(); j++){
+                            for (int i = 0; i < img.getWidth(); i++) {
+                                    Color color = new Color(img.getRGB(i, j));
+                                    int value = color.getGreen();
+                                    if (value == 133){
+                                        time++;
+                                        System.out.println("Number of time chest was added: " + time);
+                                        System.out.println(i + " : " + j);
+                                    chestList.add(new Chest(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+                                                                    }
+                            }
+                                    }
+                                    System.out.println("chest size :" + chestList.size());
+                                    return chestList;
                 }
 }

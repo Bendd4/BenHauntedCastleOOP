@@ -6,6 +6,7 @@ public class Constants {
 
 	public static class ObjectConstants	{
 		public static final int DOOR = 200;
+                public static final int CHEST = 133;
 
 		public static final int DOOR_VALUE = 100;
 
