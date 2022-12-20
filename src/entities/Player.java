@@ -52,12 +52,12 @@ public class Player extends Entity {
     private int currentHealth = maxHealth;
     private int healthWidth = healthBarWidth;
 
-    private Rectangle2D.Float attackBox;
+    private Rectangle2D.Float interactBox;
 
     private int flipX = 0;
     private int flipW = 1;
 
-    private boolean attackChecked;
+    private boolean interactChecked;
     private Playing playing;
 
     public Player(float x, float y, int width, int height, Playing playing) {
@@ -65,12 +65,12 @@ public class Player extends Entity {
         this.playing = playing;
         loadAnimations();
         initHitbox(x, y, 35 * Game.SCALE, 63 * Game.SCALE);
-        initAttackBox();
+        initInteractBox();
     }
 
-    private void initAttackBox() {
+    private void initInteractBox() {
 
-        attackBox = new Rectangle2D.Float(x, y, 65 * Game.SCALE, 63 * Game.SCALE);
+        interactBox = new Rectangle2D.Float(x, y, 65 * Game.SCALE, 63 * Game.SCALE);
     }
 
     public void update() {
@@ -91,9 +91,9 @@ public class Player extends Entity {
             return;
         }
 
-        updateAttackBox();
+        updateInteractBox();
         if (attacking) {
-            checkAttack();
+            checkInteract();
         }
         updatePos();
         if (moving)
@@ -108,20 +108,20 @@ public class Player extends Entity {
 //        playing.checkItemTouched(hitbox);
     }
 
-    private void checkAttack() {
-        if (attackChecked || aniIndex != 1) {
+    private void checkInteract() {
+        if (interactChecked || aniIndex != 1) {
             return;
         }
-        attackChecked = true;
-        playing.checkEnemyHit(attackBox);
-        playing.checkObjectHit(attackBox);
+        interactChecked = true;
+        playing.checkEnemyHit(interactBox);
+        playing.checkObjectHit(interactBox);
 
     }
 
-    private void updateAttackBox() {
+    private void updateInteractBox() {
 
-        attackBox.x = hitbox.x - 15;
-        attackBox.y = hitbox.y;
+        interactBox.x = hitbox.x - 15;
+        interactBox.y = hitbox.y;
 
     }
 
@@ -141,8 +141,8 @@ public class Player extends Entity {
 
     private void drawInteractBox(Graphics g, int lvlOffsetX, int yLvlOffset) {
         g.setColor(Color.red);
-        g.drawRect((int) attackBox.x - lvlOffsetX, (int) attackBox.y - yLvlOffset, (int) attackBox.width,
-                (int) attackBox.height);
+        g.drawRect((int) interactBox.x - lvlOffsetX, (int) interactBox.y - yLvlOffset, (int) interactBox.width,
+                (int) interactBox.height);
 
     }
 
@@ -160,7 +160,7 @@ public class Player extends Entity {
             if (aniIndex >= GetSpriteAmount(playerAction)) {
                 aniIndex = 0;
                 attacking = false;
-                attackChecked = false;
+                interactChecked = false;
             }
 
         }
@@ -287,7 +287,7 @@ public class Player extends Entity {
         down = false;
     }
 
-    public void setAttacking(boolean attacking) {
+    public void setInteract(boolean attacking) {
         this.attacking = attacking;
     }
 

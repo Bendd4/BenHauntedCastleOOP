@@ -11,20 +11,20 @@ import levels.LevelManager;
 
 import main.Game;
 import objects.ObjectManager;
+import ui.GameCompleteOverlay;
 import ui.GameOverOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
-import javax.swing.*;
     
 public class Playing extends State implements Statemethods {
     private Player player;
-    private JLabel jl;
     private int score = 0;
     private LevelManager levelManager;
     private EnemyManager enemyManager;
     private ObjectManager objectManager;
     private PauseOverlay pauseOverlay;
     private GameOverOverlay gameOverOverlay;
+    private GameCompleteOverlay gameCompleteOverlay;
     private boolean paused = false;
 
     private int xLvlOffset;
@@ -40,6 +40,7 @@ public class Playing extends State implements Statemethods {
     private int maxYOffset = (lvlHeight - Game.TILES_IN_HEIGHT) * Game.TILES_SIZE;
 
     private boolean gameOver;
+    private boolean gameComplete;
     private boolean playerDying;
 
     public Playing(Game game) {
@@ -55,6 +56,7 @@ public class Playing extends State implements Statemethods {
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
         pauseOverlay = new PauseOverlay(this);
         gameOverOverlay = new GameOverOverlay(this);
+        gameCompleteOverlay = new GameCompleteOverlay(this);
     }
 
     @Override
@@ -63,6 +65,8 @@ public class Playing extends State implements Statemethods {
             pauseOverlay.update();
         } else if (gameOver) {
             gameOverOverlay.update();
+        } else if (gameComplete) {
+            gameCompleteOverlay.update();
         } else if (playerDying) {
             player.update();
         } else {
@@ -129,7 +133,11 @@ public class Playing extends State implements Statemethods {
         enemyManager.resetAllEnemies();
 
     }
-
+    
+    public void setGameComplete(boolean gameComplete){
+        this.gameComplete = gameComplete;
+    }
+    
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
@@ -150,7 +158,7 @@ public class Playing extends State implements Statemethods {
     public void mouseClicked(MouseEvent e) {
         if (!gameOver) {
             if ((e.getButton() == MouseEvent.BUTTON1)) {
-                player.setAttacking(true);
+                player.setInteract(true);
             }
         }
     }
@@ -165,7 +173,9 @@ public class Playing extends State implements Statemethods {
     @Override
     public void mousePressed(MouseEvent e) {
         if (!gameOver) {
-            if (paused) {
+            if (gameComplete){
+                gameCompleteOverlay.mousePressed(e);
+            } else if (paused) {
                 pauseOverlay.mousePressed(e);
             }
         } else {
@@ -176,7 +186,9 @@ public class Playing extends State implements Statemethods {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (!gameOver) {
-            if (paused) {
+            if (gameComplete){
+                gameCompleteOverlay.mouseReleased(e);
+            } else if (paused) {
                 pauseOverlay.mouseReleased(e);
             }
         } else {
@@ -199,24 +211,26 @@ public class Playing extends State implements Statemethods {
     public void keyPressed(KeyEvent e) {
         if (gameOver) {
             gameOverOverlay.keyPressed(e);
+        } else if (gameComplete){
+            gameCompleteOverlay.keyPressed(e);
         } else
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_W:
-                    player.setUp(true);
+//                    player.setUp(true);
                     break;
                 case KeyEvent.VK_A:
                     player.setLeft(true);
-                    System.out.println("A");
+//                    System.out.println("A");
                     break;
                 case KeyEvent.VK_S:
-                    player.setDown(true);
+//                    player.setDown(true);
                     break;
                 case KeyEvent.VK_D:
                     player.setRight(true);
-                    System.out.println("A");
+//                    System.out.println("A");
                     break;
                 case KeyEvent.VK_SPACE:
-                    player.setAttacking(true);
+                    player.setInteract(true);
                     break;
                 case KeyEvent.VK_ESCAPE:
                     paused = !paused;

@@ -36,11 +36,13 @@ public class LoadSave {
 	public static final String MENU_BACKGROUND_IMG = "background_menu.png";
 	public static final String OPTION_MENU = "options_background.png";
                 public static final String DEATH_SCREEN = "death_screen.png";
+                public static final String LEVEL_COMPLETE = "level_complete.png";
         
 	public static final String KNIGHT_SPRITE = "player_sprites.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
+                public static final String ESCAPE_DOOR_IMG = "level res/Objects/Door (3).png";
                 public static final String CHEST_IMG = "chest.png";
         
                 public static final String SHIELD_IMG = "level res/Objects/Shield (1).png";
@@ -119,9 +121,6 @@ public class LoadSave {
                                     if (value == DOOR){
                                         doorList.add(new Door(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
-                                    else if (value == ESCAPE){
-                                        doorList.add(new Door(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
-                                    }
                             }
                     }
                     System.out.println("Number of doors :" + doorList.size());
@@ -141,7 +140,7 @@ public class LoadSave {
                                     }
                             }
                      }
-                      System.out.println("Number of chest :" + chestList.size());
+                      System.out.println("Number of chests :" + chestList.size());
                       return chestList;
                 }
                 
@@ -156,9 +155,12 @@ public class LoadSave {
                                     if (value == SHIELD || value == SWORD || value == PAINTING1 || value == PAINTING2 || value == CROWN){
                                         itemList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
+                                    else if (value == ESCAPE){
+                                        itemList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+                                    }
                             }
                                     }
-                                    System.out.println("chest size :" + itemList.size());
+                                    System.out.println("Number of items :" + itemList.size());
                                     return itemList;
                 }
                   

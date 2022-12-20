@@ -35,7 +35,6 @@ public class Knight extends Enemy {
         private void updateAttackBox() {
 		attackBox.x = hitbox.x - attackBoxOffsetX-12;
 		attackBox.y = hitbox.y;
-
 	}
         
         
@@ -76,7 +75,7 @@ public class Knight extends Enemy {
                         if(aniIndex == 0){
                             attackChecked = false;
                         }
-                        if(aniIndex == 3 && !attackChecked){
+                        if(aniIndex == 4 && !attackChecked){
                             checkPlayerHit(attackBox,player);
                         }
                         break;

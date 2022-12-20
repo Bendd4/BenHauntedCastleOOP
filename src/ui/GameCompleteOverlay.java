@@ -1,134 +1,109 @@
 package ui;
 
-import gamestates.Gamestate;
-import gamestates.Playing;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
+import gamestates.Gamestate;
+import gamestates.Playing;
 import main.Game;
-import static utilz.Constants.UI.URMButton.URM_SIZE;
 import utilz.LoadSave;
 
-/**
- *
- * @author Ben
- */
+import static utilz.Constants.UI.URMButton.*;
+
 public class GameCompleteOverlay {
-    private Playing playing;
-    private BufferedImage backgroundImg;
-    private int bgX, bgY, bgW, bgH;
-    private AudioOptions audioOptions;
-    private UrmButton menuB, replayB, unpauseB;
 
-    public GameCompleteOverlay(Playing playing) {
-        this.playing = playing;
-        loadBackground();
-        audioOptions = playing.getGame().getAudioOption();
+	private Playing playing;
+	private BufferedImage img;
+	private int imgX, imgY, imgW, imgH;
+	private UrmButton menu, play;
 
-        createUrmButtons();
-    }
+	public GameCompleteOverlay(Playing playing) {
+		this.playing = playing;
+		createImg();
+		createButton();
+	}
 
-    private void createUrmButtons() {
-        int menuX = (int) (273 * Game.SCALE);
-        int replayX = (int) (337 * Game.SCALE);
-        int unpauseX = (int) (400 * Game.SCALE);
-        int bY = (int) (295 * Game.SCALE);
+	private void createButton() {
+		int menuX = (int) (285 * Game.SCALE);
+		int playX = (int) (390 * Game.SCALE);
+		int y = (int) (180 * Game.SCALE);
+		play = new UrmButton(playX, y, URM_SIZE, URM_SIZE, 0);
+		menu = new UrmButton(menuX, y, URM_SIZE, URM_SIZE, 2);
+	}
 
-        menuB = new UrmButton(menuX, bY, URM_SIZE, URM_SIZE, 2);
-        replayB = new UrmButton(replayX, bY, URM_SIZE, URM_SIZE, 1);
-        unpauseB = new UrmButton(unpauseX, bY, URM_SIZE, URM_SIZE, 0);
+	private void createImg() {
+		img = LoadSave.getSpriteAtlas(LoadSave.DEATH_SCREEN);
+		imgW = (int) (img.getWidth() * Game.SCALE);
+		imgH = (int) (img.getHeight() * Game.SCALE / 1.15);
+		imgX = Game.GAME_WIDTH / 2 - imgW / 2;
+		imgY = (int) (100 * Game.SCALE);
+	}
 
-    }
+	public void draw(Graphics g) {
+		g.setColor(new Color(0, 0, 0, 200));
+		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 
-    private void loadBackground() {
-        backgroundImg = LoadSave.getSpriteAtlas(LoadSave.PAUSE_BACKGROUND);
-        bgW = (int) (backgroundImg.getWidth() * Game.SCALE / 1.125);
-        bgH = (int) (backgroundImg.getHeight() * Game.SCALE / 1.125);
-        bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-        bgY = (int) (25 * Game.SCALE);
-    }
+		g.drawImage(img, imgX, imgY, imgW, imgH, null);
 
-    public void update() {
+		menu.draw(g);
+		play.draw(g);
 
-        menuB.update();
-        replayB.update();
-        unpauseB.update();
+		// g.setColor(Color.white);
+		// g.drawString("Game Over", Game.GAME_WIDTH / 3, 100);
+		// g.drawString("Press esc to enter Main Menu!", Game.GAME_WIDTH / 3, 150);
 
-        audioOptions.update();
+	}
 
-    }
+	public void update() {
+		menu.update();
+		play.update();
+	}
 
-    public void draw(Graphics g) {
-        // Background
-        g.drawImage(backgroundImg, bgX, bgY, bgW, bgH, null);
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			playing.resetAll();
+			Gamestate.state = Gamestate.MENU;
+		}
+	}
 
-        // UrmButtons
-        menuB.draw(g);
-        replayB.draw(g);
-        unpauseB.draw(g);
+	private boolean isIn(UrmButton b, MouseEvent e) {
+		return b.getBounds().contains(e.getX(), e.getY());
+	}
 
-        audioOptions.draw(g);
-    }
+	public void mouseMoved(MouseEvent e) {
+		play.setMouseOver(false);
+		menu.setMouseOver(false);
 
-    public void mouseDragged(MouseEvent e) {
-        audioOptions.mouseDragged(e);
-    }
+		if (isIn(menu, e)) {
+			menu.setMouseOver(true);
+		} else if (isIn(play, e)) {
+			play.setMouseOver(true);
+		}
+	}
 
-    public void mousePressed(MouseEvent e) {
-        if (isIn(e, menuB)) {
-            menuB.setMousePressed(true);
-        } else if (isIn(e, replayB)) {
-            replayB.setMousePressed(true);
-        } else if (isIn(e, unpauseB)) {
-            unpauseB.setMousePressed(true);
-        } else {
-            audioOptions.mousePressed(e);
-        }
-    }
+	public void mouseReleased(MouseEvent e) {
+		if (isIn(menu, e)) {
+			if (menu.isMousePressed()) {
+				playing.resetAll();
+				Gamestate.state = Gamestate.MENU;
+			}
+		} else if (isIn(play, e))
+			if (play.isMousePressed()) {
+				playing.resetAll();
+			}
+		menu.resetBools();
+		play.resetBools();
+	}
 
-    public void mouseReleased(MouseEvent e) {
-        if (isIn(e, menuB)) {
-            if (menuB.isMousePressed()) {
-                playing.resetAll();
-                Gamestate.state = Gamestate.MENU;
-                playing.unpauseGame();
-            }
-        } else if (isIn(e, replayB)) {
-            if (replayB.isMousePressed()) {
-                playing.resetAll();
-                System.out.println("replay lvl!");
-            }
-        } else if (isIn(e, unpauseB)) {
-            if (unpauseB.isMousePressed()) {
-                playing.unpauseGame();
-            }
-        } else {
-            audioOptions.mouseReleased(e);
-        }
+	public void mousePressed(MouseEvent e) {
+		if (isIn(menu, e)) {
+			menu.setMousePressed(true);
+		} else if (isIn(play, e)) {
+			play.setMousePressed(true);
+		}
+	}
 
-        menuB.resetBools();
-        replayB.resetBools();
-        unpauseB.resetBools();
-
-    }
-
-    public void mouseMoved(MouseEvent e) {
-        menuB.setMouseOver(false);
-        replayB.setMouseOver(false);
-        unpauseB.setMouseOver(false);
-
-        if (isIn(e, menuB)) {
-            menuB.setMouseOver(true);
-        } else if (isIn(e, replayB)) {
-            replayB.setMouseOver(true);
-        } else if (isIn(e, unpauseB)) {
-            unpauseB.setMouseOver(true);
-        } else {
-            audioOptions.mouseMoved(e);
-        }
-    }
-
-    private boolean isIn(MouseEvent e, PauseButton b) {
-        return b.getBounds().contains(e.getX(), e.getY());
-    }
 }

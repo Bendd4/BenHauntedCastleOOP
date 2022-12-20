@@ -26,6 +26,7 @@ public class ObjectManager {
     private ArrayList<Chest> chests;
     private ArrayList<Item> items;
     private BufferedImage[] chestImgs;
+    private BufferedImage escapeDoorImgs;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
@@ -41,7 +42,6 @@ public class ObjectManager {
         doors = LoadSave.GetDoor();
         chests = LoadSave.GetChest();
         items = LoadSave.GetItem();
-//        LoadSave.Get
     }
     
     public void checkObjectTouched(Rectangle2D.Float hitbox) {
@@ -58,7 +58,7 @@ public class ObjectManager {
         for(Door d : doors)
             if(d.isActive()) {
                 if(d.getHitbox().intersects(attackbox)) {
-                    System.out.println("door");
+//                    System.out.println("used a door");
                     d.setAnimation(true);
                      changePlayerLoc(d);
                 }
@@ -66,7 +66,7 @@ public class ObjectManager {
         for(Chest c : chests)
             if(c.isActive()) {
                 if(c.getHitbox().intersects(attackbox)) {
-                    System.out.println("chest");
+//                    System.out.println("opened a chest");
                     c.setAnimation(true);
                     c.setActive(false);
                     openChest();
@@ -75,7 +75,7 @@ public class ObjectManager {
         for(Item i : items){
             if(i.isActive()) {
                 if(i.getHitbox().intersects(attackbox)) {
-                    System.out.println("chest");
+//                    System.out.println("Picked up an item");
                     i.setAnimation(true);
                     i.setActive(false);
                     collectItem(i);
@@ -176,13 +176,8 @@ public class ObjectManager {
                 x = (int) doors.get(1).hitbox.x + 15;
                 y = (int) doors.get(1).hitbox.y + 33;
             }
-            
             playing.getPlayer().changeLoc(x, y);
         }
-//        else if(i.getObjType() == ESCAPE){
-//            gameCompleteOverlay();
-//        }
-//            System.out.println("Object interacted");
     }
     
     private void openChest() {
@@ -209,6 +204,9 @@ public class ObjectManager {
                     case CROWN:
                         score = 500;
                         break;
+                    case ESCAPE:
+                        playing.setGameComplete(true);
+                        break;
                     default:
                         break;
                 }
@@ -225,12 +223,12 @@ public class ObjectManager {
         painting1Imgs = LoadSave.getSpriteAtlas(LoadSave.PICTURE1_IMG);
         painting2Imgs = LoadSave.getSpriteAtlas(LoadSave.PICTURE2_IMG);
         crownImgs = LoadSave.getSpriteAtlas(LoadSave.CROWN_IMG);
+        escapeDoorImgs = LoadSave.getSpriteAtlas(LoadSave.ESCAPE_DOOR_IMG);
+        
+        
        
         chestImgs = new BufferedImage[2];
 
-//        for (int j = 0; j < potionImgs.length; j++)
-//            for (int i = 0; i < potionImgs[j].length; i++)
-//                potionImgs[j][i] = potionSprite.getSubimage(12 * i, 16 * j, 12, 16);
          chestImgs[0] = chestSprites.getSubimage(0 , 40 , 74, 40);
          chestImgs[1] = chestSprites.getSubimage(74 , 40 , 74, 40);
     }
@@ -245,8 +243,7 @@ public class ObjectManager {
         drawDoors(g, xLvlOffset, yLvlOffset);
         drawChests(g, xLvlOffset, yLvlOffset);
         drawItems(g, xLvlOffset, yLvlOffset);
-        
-        
+
     }
 
     private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -261,7 +258,6 @@ public class ObjectManager {
                      DOOR_HEIGHT, 
                      null);
                         door.drawHitbox(g, xLvlOffset, yLvlOffset);
-                        
             }
         }
     }
@@ -338,6 +334,14 @@ public class ObjectManager {
                                 (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
                                 CROWN_WIDTH,
                                 CROWN_HEIGHT,
+                                null);
+                        break;
+                    case ESCAPE:
+                        g.drawImage(escapeDoorImgs,
+                                (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset) - 9,
+                                (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset) - 58,
+                                DOOR_WIDTH/2,
+                                DOOR_HEIGHT,
                                 null);
                         break;
                     default:
