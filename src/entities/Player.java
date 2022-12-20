@@ -44,9 +44,9 @@ public class Player extends Entity {
     private int statusBarY = (int) (10 * Game.SCALE);
 
     private int healthBarWidth = (int) (150 * Game.SCALE);
-    private int healthBarHeight = (int) (4 * Game.SCALE);
+    private int healthBarHeight = (int) (5 * Game.SCALE);
     private int healthBarXStart = (int) (34 * Game.SCALE);
-    private int healthBarYStart = (int) (14 * Game.SCALE);
+    private int healthBarYStart = (int) (13 * Game.SCALE);
 
     private int maxHealth = 30;
     private int currentHealth = maxHealth;

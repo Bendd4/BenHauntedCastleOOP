@@ -179,9 +179,9 @@ public class ObjectManager {
             
             playing.getPlayer().changeLoc(x, y);
         }
-        else if(i.getObjType() == ESCAPE){
-            gameCompleteOverlay();
-        }
+//        else if(i.getObjType() == ESCAPE){
+//            gameCompleteOverlay();
+//        }
 //            System.out.println("Object interacted");
     }
     
