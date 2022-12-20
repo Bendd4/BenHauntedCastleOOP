@@ -45,6 +45,8 @@ public class LoadSave {
         
                 public static final String SHIELD_IMG = "level res/Objects/Shield (1).png";
                 public static final String SWORD_IMG = "level res/Objects/Sword (1).png";
+                public static final String PICTURE1_IMG = "level res/Objects/Picture (1).png";
+                public static final String PICTURE2_IMG = "level res/Objects/Picture (2).png";
                 
                 public static final String CROWN_IMG = "level res/Objects/Crown.png";
                 
@@ -148,7 +150,7 @@ public class LoadSave {
                             for (int i = 0; i < img.getWidth(); i++) {
                                     Color color = new Color(img.getRGB(i, j));
                                     int value = color.getGreen();
-                                    if (value == SHIELD || value == SWORD || value == PAINTING1 || value == PAINTING2 || value == SWORD ){
+                                    if (value == SHIELD || value == SWORD || value == PAINTING1 || value == PAINTING2 || value == CROWN){
                                         itemList.add(new Item(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
                                     }
                             }

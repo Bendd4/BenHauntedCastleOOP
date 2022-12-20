@@ -14,7 +14,10 @@ public class Constants {
                 public static final int CROWN = 180;
                 
                 public static final int ITEM_WIDTH_DEFAULT = 45;
-                public static final int ITEM_HEIGHT_DEFAULT = 45;
+                public static final int ITEM_HEIGHT_DEFAULT = 60;
+                
+                public static final int CROWN_WIDTH_DEFAULT = 45;
+                public static final int CROWN_HEIGHT_DEFAULT = 40;
                 
 	public static final int DOOR_WIDTH_DEFAULT = 61;
                 public static final int DOOR_HEIGHT_DEFAULT = 96;

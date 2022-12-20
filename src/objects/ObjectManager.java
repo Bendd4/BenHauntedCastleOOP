@@ -15,15 +15,17 @@ public class ObjectManager {
     private Playing playing;
 //    private BufferedImage[][] potionImgs;
     private BufferedImage doorImgs;
-    private BufferedImage chestImgs;
+    private BufferedImage chestSprites;
+    private BufferedImage shieldImgs;
+    private BufferedImage swordImgs;
+    private BufferedImage painting1Imgs;
+    private BufferedImage painting2Imgs;
+    private BufferedImage crownImgs;
     
-    
-    
-
     private ArrayList<Door> doors;
     private ArrayList<Chest> chests;
     private ArrayList<Item> items;
-    private BufferedImage[] chestSprite;
+    private BufferedImage[] chestImgs;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
@@ -182,14 +184,7 @@ public class ObjectManager {
     
     private void openChest() {
         int score = 10;
-//            if (c == chests.get(0)){
-//                score = 5;
-//            }
-//            
-//            else{
-//
-//            }
-            playing.addScore(score);
+        playing.addScore(score);
     }
     
     
@@ -198,7 +193,6 @@ public class ObjectManager {
         if (i == items.get(0)){
                 score = 5;
             }
-            
         else{
                 score = 10;
         }
@@ -209,16 +203,20 @@ public class ObjectManager {
     private void loadImgs() {
 
         doorImgs = LoadSave.getSpriteAtlas(LoadSave.DOOR_IMG);
-        chestImgs = LoadSave.getSpriteAtlas(LoadSave.CHEST_IMG);
-
+        chestSprites = LoadSave.getSpriteAtlas(LoadSave.CHEST_IMG);
+        shieldImgs = LoadSave.getSpriteAtlas(LoadSave.SHIELD_IMG);
+        swordImgs = LoadSave.getSpriteAtlas(LoadSave.SWORD_IMG);
+        painting1Imgs = LoadSave.getSpriteAtlas(LoadSave.PICTURE1_IMG);
+        painting2Imgs = LoadSave.getSpriteAtlas(LoadSave.PICTURE2_IMG);
+        crownImgs = LoadSave.getSpriteAtlas(LoadSave.CROWN_IMG);
        
-        chestSprite = new BufferedImage[2];
+        chestImgs = new BufferedImage[2];
 
 //        for (int j = 0; j < potionImgs.length; j++)
 //            for (int i = 0; i < potionImgs[j].length; i++)
 //                potionImgs[j][i] = potionSprite.getSubimage(12 * i, 16 * j, 12, 16);
-         chestSprite[0] = chestImgs.getSubimage(0 , 40 , 74, 40);
-         chestSprite[1] = chestImgs.getSubimage(74 , 40 , 74, 40);
+         chestImgs[0] = chestSprites.getSubimage(0 , 40 , 74, 40);
+         chestImgs[1] = chestSprites.getSubimage(74 , 40 , 74, 40);
     }
 
     public void update() {
@@ -230,6 +228,7 @@ public class ObjectManager {
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         drawDoors(g, xLvlOffset, yLvlOffset);
         drawChests(g, xLvlOffset, yLvlOffset);
+        drawItems(g, xLvlOffset, yLvlOffset);
         
     }
 
@@ -246,10 +245,9 @@ public class ObjectManager {
                      null);
                         door.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
-            
-//            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
         }
     }
+
     private void drawChests(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (Chest chest : chests){
             if(chest.isActive()) {
@@ -257,7 +255,7 @@ public class ObjectManager {
                 if(chest.getObjType() == CHEST)
                     type = 1;
                 
-                g.drawImage(chestSprite[1],
+                g.drawImage(chestImgs[1],
 //                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
                  (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
@@ -267,9 +265,7 @@ public class ObjectManager {
                 chest.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
              if(!chest.isActive()) {
-               
-                
-                g.drawImage(chestSprite[0],
+                g.drawImage(chestImgs[0],
 //                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
                  (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
@@ -282,26 +278,52 @@ public class ObjectManager {
         }
     }
     
-    private void drawItem(Graphics g, int xLvlOffset, int yLvlOffset) {
+    private void drawItems(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (Item item : items){
             if(item.isActive()) {
-                if(item.getObjType() == SHIELD){
-//                g.drawImage(doorImgs[type][p.getAniIndex()],
-                    g.drawImage(doorImgs,
-                    (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset), 
-                    (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset), 
-                    DOOR_WIDTH, 
-                    DOOR_HEIGHT, 
-                    null);
-                }
-                else if(item.getObjType() == SWORD){
-//                g.drawImage(doorImgs[type][p.getAniIndex()],
-                    g.drawImage(doorImgs,
-                    (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset), 
-                    (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset), 
-                    DOOR_WIDTH, 
-                    DOOR_HEIGHT, 
-                    null);
+                switch (item.getObjType()) {
+                    case SHIELD:
+                        g.drawImage(shieldImgs,
+                                (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
+                                (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
+                                ITEM_WIDTH_DEFAULT,
+                                ITEM_HEIGHT_DEFAULT,
+                                null);
+                        break;
+                    case SWORD:
+                        g.drawImage(swordImgs,
+                                (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
+                                (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
+                                ITEM_WIDTH_DEFAULT,
+                                ITEM_HEIGHT_DEFAULT,
+                                null);
+                        break;
+                    case PAINTING1:
+                        g.drawImage(painting1Imgs,
+                                (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
+                                (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
+                                ITEM_WIDTH_DEFAULT,
+                                ITEM_HEIGHT_DEFAULT,
+                                null);
+                        break;
+                    case PAINTING2:
+                        g.drawImage(painting2Imgs,
+                                (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
+                                (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
+                                ITEM_WIDTH_DEFAULT,
+                                ITEM_HEIGHT_DEFAULT,
+                                null);
+                        break;
+                    case CROWN:
+                        g.drawImage(crownImgs,
+                                (int) ((item.getHitbox().x) - item.getxDrawOffset() - xLvlOffset),
+                                (int) ((item.getHitbox().y) - item.getyDrawOffset() - yLvlOffset),
+                                CROWN_WIDTH_DEFAULT,
+                                CROWN_HEIGHT_DEFAULT,
+                                null);
+                        break;
+                    default:
+                        break;
                 }
                 
                 item.drawHitbox(g, xLvlOffset, yLvlOffset);
@@ -316,6 +338,8 @@ public class ObjectManager {
             p.reset();
         for (Chest c : chests)
             c.reset();
+        for (Item i : items)
+            i.reset();
     }
 
 
