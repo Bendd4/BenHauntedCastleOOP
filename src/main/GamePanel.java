@@ -1,5 +1,6 @@
 package main;
 
+import gamestates.Gamestate;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import javax.swing.JLabel;
 
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.Directions.*;
@@ -18,8 +20,9 @@ import static main.Game.GAME_HEIGHT;
 import static main.Game.GAME_WIDTH;;
 
 public class GamePanel extends JPanel {
-
+        
 	private MouseInputs mouseInputs;
+        
 	private Game game;
 	private float xDelta = 100, yDelta = 100;
 	private BufferedImage img;
@@ -28,11 +31,13 @@ public class GamePanel extends JPanel {
 	private int playerAction = IDLE;
 	private int playerDir = -1;
 	private boolean moving = false;
-
+        private JLabel jl1 = new JLabel("");
+        
 	public GamePanel(Game game) {
 		mouseInputs = new MouseInputs(this);
 		this.game = game;
-
+                this.add(jl1);
+              
 		setPanelSize();
 		addKeyListener(new KeyboardInputs(this));
 		addMouseListener(mouseInputs);
@@ -76,15 +81,23 @@ public class GamePanel extends JPanel {
 			break;
 			}
 		}
+                
 	}
 
 	public void updateGame() {
-
+            
 	}
 
 	public void paintComponent(Graphics g) {
+                
 		super.paintComponent(g);
 		game.render(g);
+                 if (Gamestate.state == Gamestate.PLAYING) {
+                     game.getPlaying().getScore();
+			 jl1.setText(game.getPlaying().getScore()+"");
+                         System.out.println("haha");
+		}
+                 
 
 	}
 

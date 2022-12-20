@@ -243,6 +243,7 @@ public class ObjectManager {
         drawChests(g, xLvlOffset, yLvlOffset);
         drawItems(g, xLvlOffset, yLvlOffset);
         
+        
     }
 
     private void drawDoors(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -257,6 +258,7 @@ public class ObjectManager {
                      DOOR_HEIGHT, 
                      null);
                         door.drawHitbox(g, xLvlOffset, yLvlOffset);
+                        
             }
         }
     }

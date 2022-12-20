@@ -11,7 +11,9 @@ import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
 
-public class Game implements Runnable {
+import javax.swing.*;
+
+public class Game extends JPanel implements Runnable {
 
 	private GameWindow gameWindow;
 	private GamePanel gamePanel;
@@ -33,6 +35,8 @@ public class Game implements Runnable {
 	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
 	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+        
+      
 
 	public Game() {
 		initClasses();
@@ -40,7 +44,7 @@ public class Game implements Runnable {
 		gameWindow = new GameWindow(gamePanel);
                 gamePanel.setFocusable(true);
 		gamePanel.requestFocus();
-
+             
 		startGameLoop();
 
 	}
@@ -51,6 +55,7 @@ public class Game implements Runnable {
 		levelManager = new LevelManager(this);
 		playing = new Playing(this);
 		gameOptions = new GameOptions(this);
+                
 	}
 
 	private void startGameLoop() {

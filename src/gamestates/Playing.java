@@ -269,8 +269,8 @@ public class Playing extends State implements Statemethods {
         this.score += score;
         System.out.println("Score: " + this.score);
     }
-//    public int getScore(){
-//        return this.score;
-//    }
+    public int getScore(){
+        return this.score;
+    }
 
 }
