@@ -4,7 +4,7 @@ import main.Game;
 
 public class Constants {
 
-	public static class ObjectConstants	{
+        public static class ObjectConstants	{
 	public static final int DOOR = 200;
                 public static final int ESCAPE= 201;
                 public static final int CHEST = 133;
@@ -38,9 +38,7 @@ public class Constants {
 
                     return 1;
                 }
-                
-
-	}
+        }
 
 	public static class EnemyConstants {
 		public static final int KNIGHT = 233;

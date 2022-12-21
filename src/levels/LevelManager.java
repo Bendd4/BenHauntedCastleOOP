@@ -4,12 +4,10 @@ import main.Game;
 import utilz.LoadSave;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.awt.Graphics;
 
 public class LevelManager {
 
-    
     private Game game;
     private BufferedImage[] levelSprite;
     private Level lvl;
@@ -19,7 +17,6 @@ public class LevelManager {
         importOutsideSprites();
         lvl = new Level(LoadSave.GetLevelData());
     }
-
     private void importOutsideSprites() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.LEVEL_ATLAS);
         levelSprite = new BufferedImage[130];
@@ -30,7 +27,6 @@ public class LevelManager {
             }
         }
     }
-
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int j = 0; j < Game.GAME_HEIGHT; j++) {
             for (int i = 0; i < Game.GAME_WIDTH; i++) {
@@ -39,15 +35,9 @@ public class LevelManager {
             }
         }
     }
-
     public void update() {
 
     }
-
-    /**
-     *
-     * @return
-     */
     public Level getCurrentLevel(){
         return lvl;
     }

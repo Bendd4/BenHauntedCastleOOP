@@ -3,20 +3,17 @@ package utilz;
 //import java.awt.Graphics;
 import entities.Knight;
 import java.awt.Color;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import java.net.URL;
-import javax.swing.*;
+
 import main.Game;
 import objects.Chest;
 import objects.Door;
 import objects.Item;
 
-import static utilz.Constants.Directions.*;
 import static utilz.Constants.ObjectConstants.*;
 import static utilz.Constants.EnemyConstants.KNIGHT;
 
@@ -71,7 +68,6 @@ public class LoadSave {
 		}
 		return img;
 	}
-
 	public static int[][] GetLevelData() {
 //		 BufferedImage img = getSpriteAtlas(TESTING_ROOM);
 		BufferedImage img = getSpriteAtlas(LEVEL_DATA);
@@ -107,7 +103,6 @@ public class LoadSave {
 					list.add(new Knight(i * Game.TILES_SIZE, j * Game.TILES_SIZE-28));
 			}
 		return list;
-
 	}
         
                 public static ArrayList<Door> GetDoor(){
