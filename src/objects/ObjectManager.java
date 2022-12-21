@@ -180,7 +180,7 @@ public class ObjectManager {
     }
     
     private void openChest() {
-        int score = 10;
+        int score = 15;
         playing.addScore(score);
     }
     
@@ -229,8 +229,8 @@ public class ObjectManager {
        
         chestImgs = new BufferedImage[2];
 
-         chestImgs[0] = chestSprites.getSubimage(0 , 40 , 74, 40);
-         chestImgs[1] = chestSprites.getSubimage(74 , 40 , 74, 40);
+         chestImgs[0] = chestSprites.getSubimage(0 , 0 , 74, 92);
+         chestImgs[1] = chestSprites.getSubimage(74 , 0 , 74, 92);
     }
 
     public void update() {
@@ -272,9 +272,9 @@ public class ObjectManager {
                 g.drawImage(chestImgs[1],
 //                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
-                 (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
-                 (int) (CHEST_HEIGHT),
-                 (int) (CHEST_WIDTH), 
+                 (int) ((chest.getHitbox().y-18) - chest.getyDrawOffset() - yLvlOffset), 
+                 (int) (CHEST_WIDTH),
+                 (int) (CHEST_HEIGHT), 
                  null);
 //                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
@@ -282,9 +282,9 @@ public class ObjectManager {
                 g.drawImage(chestImgs[0],
 //                g.drawImage(chestImgs,
                  (int) ((chest.getHitbox().x) - chest.getxDrawOffset() - xLvlOffset), 
-                 (int) ((chest.getHitbox().y) - chest.getyDrawOffset() - yLvlOffset), 
-                 (int) (CHEST_HEIGHT),
-                 (int) (CHEST_WIDTH), 
+                 (int) ((chest.getHitbox().y-18) - chest.getyDrawOffset() - yLvlOffset), 
+                 (int) (CHEST_WIDTH),
+                 (int) (CHEST_HEIGHT), 
                  null);
 //                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
             }

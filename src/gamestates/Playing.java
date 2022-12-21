@@ -135,7 +135,6 @@ public class Playing extends State implements Statemethods {
         player.resetAll();
         objectManager.resetAllObjects();
         enemyManager.resetAllEnemies();
-//        audioPlayer = new AudioPlayer();
 
     }
     
