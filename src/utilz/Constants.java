@@ -154,8 +154,8 @@ public class Constants {
 		public static final int RUNNING = 4;
 		public static final int DEAD = 2;
 
-		public static final int HIT = 5;
-		public static final int ATTACK_1 = 0;
+//		public static final int HIT = 0;
+		public static final int INTERACT = 0;
 
 		public static int GetSpriteAmount(int player_action) {
 			switch (player_action) {
@@ -163,13 +163,13 @@ public class Constants {
 					return 7;
 				case IDLE:
 					return 8;
-				case HIT:
-					return 4;
+//				case HIT:
+//					return 4;
 				case DEAD:
 					return 6;
-				case ATTACK_1:
-
-					return 8;
+//				case INTERACT:
+//
+//					return 2;
 
 				default:
 					return 1;

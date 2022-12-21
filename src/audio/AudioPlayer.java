@@ -127,7 +127,7 @@ public class AudioPlayer {
         playEffect(LVL_COMPLETED);
     }
     
-    public void playAttackSound() {
+    public void playInteractSound() {
         int start = 4;
         start += rand.nextInt(3);
         playEffect(start);

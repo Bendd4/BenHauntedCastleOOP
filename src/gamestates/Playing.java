@@ -149,8 +149,8 @@ public class Playing extends State implements Statemethods {
         this.gameOver = gameOver;
     }
 
-    public void checkObjectHit(Rectangle2D.Float attackBox) {
-        objectManager.checkObjectHit(attackBox);
+    public void checkObjectHit(Rectangle2D.Float interactBox) {
+        objectManager.checkObjectHit(interactBox);
     }
 
     public void checkItemTouched(Rectangle2D.Float hitbox) {

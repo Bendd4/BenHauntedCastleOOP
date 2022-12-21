@@ -85,7 +85,7 @@ public class Player extends Entity {
                 playing.getGame().getAudioPlayer().playEffect(AudioPlayer.DIE);
             } else if (aniIndex == GetSpriteAmount(DEAD) - 1 && aniTick >= aniSpeed - 1) {
                 playing.setGameOver(true);
-                playing.getGame().getAudioPlayer().stopSong();
+//                playing.getGame().getAudioPlayer().stopSong();
                 playing.getGame().getAudioPlayer().playEffect(AudioPlayer.GAMEOVER);
             } else {
                 updateAnimationTick();
@@ -110,13 +110,15 @@ public class Player extends Entity {
   
 
     private void checkInteract() {
-        if (interactChecked || aniIndex != 1) {
+        if (interactChecked) {
             return;
         }
         interactChecked = true;
         
         playing.checkObjectHit(interactBox);
-        playing.getGame().getAudioPlayer().playAttackSound();
+        playing.getGame().getAudioPlayer().playInteractSound();
+        
+//        interactChecked = false;
 
     }
 
@@ -175,9 +177,9 @@ public class Player extends Entity {
             playerAction = RUNNING;
         else
             playerAction = IDLE;
-        if (interacting) {
-            playerAction = ATTACK_1;
-        }
+//        if (interacting) {
+//            playerAction = INTERACT;
+//        }
         if (startAni != playerAction) {
             resetAniTick();
         }

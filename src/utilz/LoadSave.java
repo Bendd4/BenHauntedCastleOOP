@@ -38,7 +38,7 @@ public class LoadSave {
                 public static final String DEATH_SCREEN = "death_screen.png";
                 public static final String LEVEL_COMPLETE = "level_complete.png";
         
-	public static final String KNIGHT_SPRITE = "player_sprites.png";
+	public static final String KNIGHT_SPRITE = "knight_sprites.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 
 	public static final String DOOR_IMG = "level res/Objects/Door (5).png";
