@@ -30,12 +30,12 @@ public class Player extends Entity {
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 35;
     private int playerAction = IDLE;
-    private boolean left, up, right, down;
+    private boolean left, right;
     private float playerSpeed = 0.75f;
     private int[][] lvlData;
     private float xDrawOffset = 64 * Game.SCALE;
     private float yDrawOffset = 23 * Game.SCALE;
-    private boolean moving = false, attacking = false;
+    private boolean moving = false, interacting = false;
 
     private BufferedImage statusBarImg;
 
@@ -96,21 +96,18 @@ public class Player extends Entity {
         }
 
         updateInteractBox();
-        if (attacking) {
+        if (interacting) {
             checkInteract();
         }
         updatePos();
-        if (moving)
-            checkItemTouched();
+
 
         updateAnimationTick();
         setAnimation();
 
     }
 
-    private void checkItemTouched() {
-//        playing.checkItemTouched(hitbox);
-    }
+  
 
     private void checkInteract() {
         if (interactChecked || aniIndex != 1) {
@@ -164,7 +161,7 @@ public class Player extends Entity {
             aniIndex++;
             if (aniIndex >= GetSpriteAmount(playerAction)) {
                 aniIndex = 0;
-                attacking = false;
+                interacting = false;
                 interactChecked = false;
             }
 
@@ -178,7 +175,7 @@ public class Player extends Entity {
             playerAction = RUNNING;
         else
             playerAction = IDLE;
-        if (attacking) {
+        if (interacting) {
             playerAction = ATTACK_1;
         }
         if (startAni != playerAction) {
@@ -188,21 +185,18 @@ public class Player extends Entity {
 
     private void updatePos() {
         moving = false;
-        if (!left && !right && !up && !down)
+        if (!left && !right )
             return;
 
-        // if (!InAir){
+      
         if ((!left && !right) || (left && right)) {
             return;
         }
-        // }
+
 
         float xSpeed = 0, ySpeed = 0;
 
-        if (up)
-            ySpeed = -playerSpeed;
-        else if (down)
-            ySpeed = playerSpeed;
+      
         if (left) {
             xSpeed -= playerSpeed;
             flipX = width;
@@ -213,12 +207,7 @@ public class Player extends Entity {
             flipX = 0;
             flipW = 1;
         }
-        // if (CanMoveHere(x + xSpeed, y + ySpeed, width, height, lvlData)) {
-        // this.x += xSpeed;
-        // this.y += ySpeed;
-        // moving = true;
-        // }
-        //        playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
+    
         if (CanMoveHere(hitbox.x + xSpeed, hitbox.y + ySpeed, hitbox.width, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
             hitbox.y += ySpeed;
@@ -262,13 +251,7 @@ public class Player extends Entity {
         this.left = left;
     }
 
-    public boolean isUp() {
-        return up;
-    }
-
-    public void setUp(boolean up) {
-        this.up = up;
-    }
+   
 
     public boolean isRight() {
         return right;
@@ -278,23 +261,16 @@ public class Player extends Entity {
         this.right = right;
     }
 
-    public boolean isDown() {
-        return down;
-    }
-
-    public void setDown(boolean down) {
-        this.down = down;
-    }
+    
 
     public void resetDirBooleans() {
         left = false;
         right = false;
-        up = false;
-        down = false;
+    
     }
 
-    public void setInteract(boolean attacking) {
-        this.attacking = attacking;
+    public void setInteract(boolean interacting) {
+        this.interacting = interacting;
     }
 
     private void resetAniTick() {
@@ -305,7 +281,7 @@ public class Player extends Entity {
     public void resetAll() {
         resetDirBooleans();
 
-        attacking = false;
+        interacting = false;
         moving = false;
         playerAction = IDLE;
         currentHealth = maxHealth;
@@ -313,8 +289,6 @@ public class Player extends Entity {
         hitbox.x = x;
         hitbox.y = y;
 
-        // if (!IsEntityOnFloor(hitbox, lvlData))
-        // inAir = true;
     }
 
     

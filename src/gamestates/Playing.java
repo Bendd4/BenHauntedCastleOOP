@@ -251,15 +251,11 @@ public class Playing extends State implements Statemethods {
     public void keyReleased(KeyEvent e) {
         if (!gameOver && !gameComplete)
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_W:
-                    player.setUp(false);
-                    break;
+             
                 case KeyEvent.VK_A:
                     player.setLeft(false);
                     break;
-                case KeyEvent.VK_S:
-                    player.setDown(false);
-                    break;
+          
                 case KeyEvent.VK_D:
                     player.setRight(false);
                     break;
