@@ -40,12 +40,9 @@ public class Knight extends Enemy {
         
 
 	private void updateBehavior(int[][] lvlData, Player player) {
-		if (firstUpdate)
-			firstUpdateCheck(lvlData);
-
-		if (inAir)
-			updateInAir(lvlData);
-		else {
+		
+			
+		
 			 switch(enemyState){
                     case IDLE:
                            if(isPlayerInRange(player)){
@@ -83,7 +80,7 @@ public class Knight extends Enemy {
                         break;
                 }
             
-		}
+		
 
 	}
         

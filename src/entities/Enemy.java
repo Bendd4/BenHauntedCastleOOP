@@ -30,25 +30,10 @@ public abstract class Enemy extends Entity {
                 currentHealth = maxHealth;
 
 	}
-        protected void firstUpdateCheck(int[][] lvlData){
-             if(firstUpdate){
-                if(!IsEntityOnFloor(hitbox, lvlData)){
-                    inAir = true;
-                }
-                firstUpdate = false;
-            }
-        }
+       
+     
         
-        protected void updateInAir(int[][] lvlData) {
-		if (CanMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)) {
-			hitbox.y += fallSpeed;
-			fallSpeed += gravity;
-		} else {
-			inAir = false;
-			hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, fallSpeed);
-			tileY = (int) (hitbox.y / Game.TILES_SIZE);
-		}
-	}
+      
         
         protected void move(int[][] lvlData) {
 		float xSpeed = 0;
@@ -80,7 +65,7 @@ public abstract class Enemy extends Entity {
                                 if (player.getHitbox().y == hitbox.y)
 //		if (playerTileY == tileY)
 			if (isPlayerInRange(player)) {
-				if (IsSightClear(lvlData, hitbox, player.hitbox, tileY))
+				
 					return true;
 			}
 
