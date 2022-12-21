@@ -12,9 +12,8 @@ import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
 
-import javax.swing.*;
 
-public class Game extends JPanel implements Runnable {
+public class Game  implements Runnable {
 
 	private GameWindow gameWindow;
 	private GamePanel gamePanel;
@@ -44,8 +43,8 @@ public class Game extends JPanel implements Runnable {
 		initClasses();
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
-                gamePanel.setFocusable(true);
-		gamePanel.requestFocus();
+                                   gamePanel.setFocusable(true);
+		gamePanel.requestFocusInWindow();
              
 		startGameLoop();
 
@@ -53,7 +52,7 @@ public class Game extends JPanel implements Runnable {
 
 	private void initClasses() {
 		audioOptions = new AudioOptions(this);
-                                audioPlayer = new AudioPlayer();
+                                   audioPlayer = new AudioPlayer();
 		menu = new Menu(this);
 		levelManager = new LevelManager(this);
 		playing = new Playing(this);
