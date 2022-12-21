@@ -158,9 +158,7 @@ public class Playing extends State implements Statemethods {
         objectManager.checkObjectTouched(hitbox);
     }
 
-    public void checkEnemyHit(Rectangle2D.Float attackBox) {
-        enemyManager.checkEnemyHit(attackBox);
-    }
+   
 
     @Override
     public void mouseClicked(MouseEvent e) {

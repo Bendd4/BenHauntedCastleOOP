@@ -7,12 +7,9 @@ import static utilz.Constants.EnemyConstants.*;
 
 import static utilz.HelpMethods.*;
 public abstract class Enemy extends Entity {
-	protected int aniIndex, enemyState, enemyType;
-	protected int aniTick, aniSpeed = 28;
-        protected boolean firstUpdate = true;
-        protected boolean inAir = false;
-        protected float fallSpeed;
-        protected float gravity =0.4f*Game.SCALE; 
+        protected int aniIndex, enemyState, enemyType;
+        protected int aniTick, aniSpeed = 28;
+     
         protected float walkSpeed = 0.5f * Game.SCALE;
         protected int walkDir = LEFT;
         protected int  tileY; 
@@ -60,10 +57,10 @@ public abstract class Enemy extends Entity {
 	}
         
         protected boolean canSeePlayer(int[][] lvlData, Player player) {
-//		int playerTileY = (int) (player.getHitbox().y / Game.TILES_SIZE);
+
                                 
                                 if (player.getHitbox().y == hitbox.y)
-//		if (playerTileY == tileY)
+
 			if (isPlayerInRange(player)) {
 				
 					return true;
@@ -91,13 +88,7 @@ public abstract class Enemy extends Entity {
                         }
 	}
         
-        public void hurt(int amount) {
-		currentHealth -= amount;
-		if (currentHealth <= 0)
-			newState(DEAD);
-		else
-			newState(HIT);
-	}
+      
         
         protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player) {
 		if (attackBox.intersects(player.hitbox))
@@ -122,7 +113,7 @@ public abstract class Enemy extends Entity {
 			if (aniIndex >= GetSpriteAmount(enemyType, enemyState)) {
 				aniIndex = 0;
                                 if(enemyState == ATTACK){
-					enemyState = IDLE;
+                                        enemyState = IDLE;
                                 }
                                 else if(enemyState == HIT){
                                     enemyState = IDLE;
@@ -146,11 +137,11 @@ public abstract class Enemy extends Entity {
         public void resetEnemy() {
 		hitbox.x = x;
 		hitbox.y = y;
-		firstUpdate = true;
+		
 		currentHealth = maxHealth;
 		newState(IDLE);
 		active = true;
-		fallSpeed = 0;
+		
 	}
         
 	public int getAniIndex() {

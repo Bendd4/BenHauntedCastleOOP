@@ -117,7 +117,7 @@ public class Player extends Entity {
             return;
         }
         interactChecked = true;
-        playing.checkEnemyHit(interactBox);
+        
         playing.checkObjectHit(interactBox);
         playing.getGame().getAudioPlayer().playAttackSound();
 

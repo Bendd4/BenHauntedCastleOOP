@@ -34,30 +34,23 @@ public class EnemyManager {
 	}
 
 	public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-		drawCrabs(g, xLvlOffset, yLvlOffset);
+		drawKnights(g, xLvlOffset, yLvlOffset);
 	}
 
-	private void drawCrabs(Graphics g, int xLvlOffset, int yLvlOffset) {
+	private void drawKnights(Graphics g, int xLvlOffset, int yLvlOffset) {
 		for (Knight c : knights){
-                    if(c.isActive()){
-			g.drawImage(knightArr[c.getEnemyState()][c.getAniIndex()], 
-                                (int) c.getHitbox().x - xLvlOffset-48 +c.flipX(), 
-                                (int) (c.getHitbox().y - yLvlOffset-20), 
-                                KNIGHT_WIDTH *c.flipW(), KNIGHT_HEIGHT, null);
-                        c.drawAttackBox(g, xLvlOffset, yLvlOffset);
-                        c.drawHitbox(g, xLvlOffset, yLvlOffset);
-                    }
+                                             if(c.isActive()){
+                                                    g.drawImage(knightArr[c.getEnemyState()][c.getAniIndex()], 
+                                                    (int) c.getHitbox().x - xLvlOffset-48 +c.flipX(), 
+                                                    (int) (c.getHitbox().y - yLvlOffset-20), 
+                                                    KNIGHT_WIDTH *c.flipW(), KNIGHT_HEIGHT, null);
+                                                    c.drawAttackBox(g, xLvlOffset, yLvlOffset);
+                                                    c.drawHitbox(g, xLvlOffset, yLvlOffset);
+                                        }
                 }
 	}
         
-        public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		for (Knight c : knights)
-			if (c.isActive())
-				if (attackBox.intersects(c.getHitbox())) {
-					c.hurt(0);
-					return;
-				}
-	}
+      
 
 	private void loadEnemyImgs() {
 		knightArr = new BufferedImage[10][7];

@@ -102,14 +102,13 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 		game.render(g);
                  if (Gamestate.state == Gamestate.PLAYING) {
-                     game.getPlaying().getScore();
-                     jl1.setText(game.getPlaying().getScore()+"");
-                      jl1 .setBounds((int) (45 * Game.SCALE), (int) (29 * Game.SCALE), 50, 50);
-                     if(game.getPlaying().getGameComplete()){
-                           jl1.setFont(new Font("Verdana", Font.PLAIN, 18));
-                           jl1 .setBounds((int) (355 * Game.SCALE), (int) (175 * Game.SCALE),
-             50, 50);
-                     }
+                            game.getPlaying().getScore();
+                            jl1.setText(game.getPlaying().getScore()+"");
+                            jl1 .setBounds((int) (45 * Game.SCALE), (int) (29 * Game.SCALE), 50, 50);
+                            if(game.getPlaying().getGameComplete()){
+                                    jl1.setFont(new Font("Verdana", Font.PLAIN, 18));
+                                    jl1 .setBounds((int) (335 * Game.SCALE), (int) (175 * Game.SCALE),150, 50);
+                         }
 	}
                  else if (Gamestate.state == Gamestate.MENU) {
 			 jl1.setText("");
