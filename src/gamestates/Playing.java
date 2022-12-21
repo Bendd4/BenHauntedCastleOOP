@@ -142,6 +142,9 @@ public class Playing extends State implements Statemethods {
     public void setGameComplete(boolean gameComplete){
         this.gameComplete = gameComplete;
     }
+    public boolean getGameComplete(){
+        return this.gameComplete;
+    }
     
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
