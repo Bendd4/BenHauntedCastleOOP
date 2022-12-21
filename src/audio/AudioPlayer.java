@@ -47,12 +47,6 @@ public class AudioPlayer {
         songs = new Clip[names.length];
         for(int i = 0; i < songs.length; i++)
             songs[i] = getClip(names[i]);
-        
-//        String[] names = {"menu", "level1", "level2"};
-//        songs = new Clip[names.length];
-//        for(int i = 0; i < songs.length; i++)
-//            songs[i] = getClip(names[i]);
-
     }
     
     private void loadEffects() {
