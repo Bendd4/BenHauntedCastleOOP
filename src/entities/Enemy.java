@@ -27,10 +27,6 @@ public abstract class Enemy extends Entity {
                 currentHealth = maxHealth;
 
 	}
-       
-     
-        
-      
         
         protected void move(int[][] lvlData) {
 		float xSpeed = 0;

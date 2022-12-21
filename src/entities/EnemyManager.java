@@ -44,8 +44,8 @@ public class EnemyManager {
                                                     (int) c.getHitbox().x - xLvlOffset-48 +c.flipX(), 
                                                     (int) (c.getHitbox().y - yLvlOffset-20), 
                                                     KNIGHT_WIDTH *c.flipW(), KNIGHT_HEIGHT, null);
-                                                    c.drawAttackBox(g, xLvlOffset, yLvlOffset);
-                                                    c.drawHitbox(g, xLvlOffset, yLvlOffset);
+//                                                    c.drawAttackBox(g, xLvlOffset, yLvlOffset);
+//                                                    c.drawHitbox(g, xLvlOffset, yLvlOffset);
                                         }
                 }
 	}

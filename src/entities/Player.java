@@ -136,8 +136,8 @@ public class Player extends Entity {
                 (int) (hitbox.x - xDrawOffset) - xLvlOffset + flipX,
                 (int) (hitbox.y - yDrawOffset) - yLvlOffset-17,
                 width * flipW, height, null);
-        drawHitbox(g, xLvlOffset, yLvlOffset);
-        drawInteractBox(g, xLvlOffset, yLvlOffset);
+//        drawHitbox(g, xLvlOffset, yLvlOffset);
+//        drawInteractBox(g, xLvlOffset, yLvlOffset);
         drawUI(g);
     }
 

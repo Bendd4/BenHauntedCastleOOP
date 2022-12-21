@@ -257,7 +257,7 @@ public class ObjectManager {
                      DOOR_WIDTH, 
                      DOOR_HEIGHT, 
                      null);
-                        door.drawHitbox(g, xLvlOffset, yLvlOffset);
+//                        door.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
         }
     }
@@ -276,7 +276,7 @@ public class ObjectManager {
                  (int) (CHEST_HEIGHT),
                  (int) (CHEST_WIDTH), 
                  null);
-                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
+//                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
              if(!chest.isActive()) {
                 g.drawImage(chestImgs[0],
@@ -286,7 +286,7 @@ public class ObjectManager {
                  (int) (CHEST_HEIGHT),
                  (int) (CHEST_WIDTH), 
                  null);
-                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
+//                chest.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
 //            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
         }
@@ -348,7 +348,7 @@ public class ObjectManager {
                         break;
                 }
                 
-                item.drawHitbox(g, xLvlOffset, yLvlOffset);
+//                item.drawHitbox(g, xLvlOffset, yLvlOffset);
             }
             
 //            System.out.println(door.getHitbox().x + " : " + door.getHitbox().y);
