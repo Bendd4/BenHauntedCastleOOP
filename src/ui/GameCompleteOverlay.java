@@ -29,7 +29,7 @@ public class GameCompleteOverlay {
 	private void createButton() {
 		int menuX = (int) (285 * Game.SCALE);
 		int playX = (int) (390 * Game.SCALE);
-		int y = (int) (180 * Game.SCALE);
+		int y = (int) (230 * Game.SCALE);
 		play = new UrmButton(playX, y, URM_SIZE, URM_SIZE, 0);
 		menu = new UrmButton(menuX, y, URM_SIZE, URM_SIZE, 2);
 	}

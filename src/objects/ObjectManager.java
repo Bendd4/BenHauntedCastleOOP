@@ -13,7 +13,6 @@ import static utilz.Constants.ObjectConstants.*;
 public class ObjectManager {
 
     private Playing playing;
-//    private BufferedImage[][] potionImgs;
     private BufferedImage doorImgs;
     private BufferedImage chestSprites;
     private BufferedImage shieldImgs;
