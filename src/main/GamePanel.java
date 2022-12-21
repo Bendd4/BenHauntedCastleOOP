@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import java.awt.*;
 import javax.swing.JLabel;
 
 import static utilz.Constants.PlayerConstants.*;
@@ -32,13 +33,22 @@ public class GamePanel extends JPanel {
 	private int playerDir = -1;
 	private boolean moving = false;
         private JLabel jl1 = new JLabel("");
+        private JLabel jl2 = new JLabel("haha");
         
 	public GamePanel(Game game) {
 		mouseInputs = new MouseInputs(this);
 		this.game = game;
-                this.add(jl1);
               
-		setPanelSize();
+                this.setLayout(null);
+		
+             
+                
+                this.add(jl1);  
+                jl1 .setBounds((int) (45 * Game.SCALE), (int) (29 * Game.SCALE),
+             50, 50);
+                
+                  
+                  setPanelSize();
 		addKeyListener(new KeyboardInputs(this));
 		addMouseListener(mouseInputs);
 		addMouseMotionListener(mouseInputs);
